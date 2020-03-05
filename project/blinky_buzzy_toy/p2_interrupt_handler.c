@@ -1,11 +1,12 @@
 #include <msp430.h>
 #include "buttons.h"
 #include "wdInterruptHandler.h"
-
+#include "stateMachines.h"
 void frequency_recovery() {
   if (P2IFG & BTN1 && frequency_btn == 1) {
     P2IFG &= ~BIT0;
     frequency_btn = -1;
+    
   }
   // BTN 2 pressed.
   else if ((P2IFG & BTN2) && frequency_btn == 2) {
@@ -20,7 +21,13 @@ void frequency_recovery() {
     P2IFG &= ~BIT3;
     frequency_btn = -1;
   }
-  
+  else if ((P2IFG & 0x7)) {
+    turn_on_red();
+    P2IFG &= ~0x7;
+  }
+  else {
+    P2IFG &= ~BUTTONS;
+  }
 }
 
 /* Switch on P2 */
@@ -37,6 +44,12 @@ __interrupt_vec(PORT2_VECTOR) Port_2(){
   if (game_num == 2) {
     frequency_recovery();
   }
+
+  if ((P2IFG & BTN4) && game_num == 2) {
+    P2IFG &= ~BTN4;
+    game_num = 3;
+  }
+  
   //if (P2IFG & BUTTONS) {	      /* did a button cause this interrupt? */
   //P2IFG &= ~BUTTONS;		      /* clear pending sw interrupts */
     //buttons_interrupt_handler();	/* single handler for all switches */
