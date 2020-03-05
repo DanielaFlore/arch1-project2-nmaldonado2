@@ -5,13 +5,12 @@
 
 char game_num = 1;
 signed char frequency_btn = -1;
-//int blink_count = 0;
 
 void high_pitch() {
   buzzer_set_period(1000000, 1);
 }
 
-void mario_sound(){
+void fur_elise_sound(){
   short sound_notes[] = {1,2,1,2,1,3,4,5,6};
   static int conductor = 0;
   static int blink_count = 0;
@@ -71,6 +70,7 @@ void mario_sound(){
 void find_frequency() {
   static int tick = 0;
   static rand_frequency = 0;
+  static char light_on = 0;
   
   if (tick > 440) {
     tick = 1;
@@ -80,75 +80,34 @@ void find_frequency() {
   }
   
   if (frequency_btn == -1) {
+    turn_on_green();
     rand_frequency = (tick % (33000 + 1 - 500)) + 500;
     frequency_btn = (tick % (3 + 1 - 1)) + 1;
-    //frequency_btn = 3;
-
-    turn_on_green();
   }
   else {
-    turn_on_red();
+    turn_off_red();
     turn_off_green();
   }
-  //buzzer_set_period(rand_frequency, 1);
   buzzer_set_period(rand_frequency, 1);
+}
+
+void catch_red(){
+
 }
 
 void
 __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
   
   if (game_num == 1) {
-    mario_sound();
+    fur_elise_sound();
   }
   else if (game_num == 2) {
     find_frequency();
   }
+  else if (game_num == 3) {
+    catch_red();
+  }
 }
-
-void button_flash() {
-  
-  int i = 0;
-  /*
-
-  while (1) {
-    while (((P2IN & 1) == 0) && ((P2IN & 8) == 0)) {
-      turn_green_and_red_on();
-    }
-
-    while ((P2IN & 1) == 0 && (P2IN & 8) != 0) {
-      turn_green_on();
-    }
-
-    while ((P2IN & 1) != 0 && (P2IN & 8) == 0) {
-      turn_red_on();
-    }
-    while ((P2IN & 1) != 0 && (P2IN & 8) != 0) {
-      turn_off();
-    }
-  }
-  */
-  /*
-  else if ((P2IN & 2) ){
-    turn_red_on();
-  }
-  */
-  /*
-  if ((P2IN & 2) == 0) {
-    turn_green_on();
-    
-  }
-  else {
-    turn_red_on();
-  }
-  */
-}
-
-/*
-void button_init() {
-  P2DIR |= 3;
-  P2REN &= 3;
-}
-*/
 
 void button_init()
 {
@@ -164,19 +123,3 @@ void button_init()
   P2DIR &= ~9;		/* set switches' bits for input */
 
 }
-
-/*
-void led_change()
-{
-    // Turns on bits
-    // if red on then obooooooo1
-    // if green on then ob01000000
-    char ledFlags = redVal[red_on] | greenVal[green_on];
-
-    // 
-    P1OUT &= (0xff^LEDS) | ledFlags; // clear bit for off leds
-
-    
-    P1OUT |= ledFlags;		     // set bit for on leds
-   
-}*/
