@@ -48,7 +48,7 @@ void buzzer_set_period(short cycles, short mute) /* buzzer clock = 2MHz.  (perio
   // at 10.
   /* one half cycle */
 }
-
+/*
 void set_sound() {
   static int turned_on = 1;
   if (turned_on) {
@@ -60,7 +60,7 @@ void set_sound() {
     turned_on = 1;
   }
 }
-
+*/
 short frequency(short i){
   if (i == 1) {
     return 6000;
@@ -86,10 +86,10 @@ short pitch(short i) {
   if (i == 2) {
     return 1;
     }*/
-  return 10;
+  return 1;
 }
 
-void set_sound2(short i) {
+void set_sound(char i) {
 static int turned_on = 1;
   if (turned_on) {
 
