@@ -5,6 +5,23 @@
 #include "buzzer.h"
 
 void frequency_recovery() {
+  if ((P2IN & BUTTONS) == 0x7) {
+    game_num = 3;
+  }
+  else if ((P2IN & 0xf) == 0xf) {
+    turn_off_green();
+    turn_off_red();
+  }
+  else {
+    if ((P2IN & 0xf) == frequency_btn) {
+      turn_on_green();
+      frequency_btn = -1;
+    }
+    else {
+      turn_on_red();
+    }
+  }
+  /*
   if ((P2IN & BIT0) == 0) {
     //turn_on_red();
     //turn_off_green();
@@ -19,7 +36,7 @@ void frequency_recovery() {
     //turn_off_green();
     //turn_off_red();
   }
-  
+  */
   /*
   if (P2IFG & BIT3) {
     P2IFG &= ~BIT3;
@@ -67,6 +84,9 @@ __interrupt_vec(PORT2_VECTOR) Port_2() {
     P2IFG &= ~BUTTONS;
     if (game_num == 1) {
       game_one_interrupt_handler();
+    }
+    else if (game_num == 2) {
+      frequency_recovery();
     }
     buttons_interrupt_handler();
   }
