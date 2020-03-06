@@ -6,7 +6,7 @@
 #define BTN3 BIT2
 #define BTN4 BIT3
 
-#define BUTTONS BTN1 | BTN2 | BTN3 | BTN4
+#define BUTTONS 0xf
 
 void buttons_init();
 void buttons_interrupt_handler();

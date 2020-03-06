@@ -4,14 +4,20 @@
 
 char button_state_down, button_state_changed; /* effectively boolean */
 
-static char 
+static void
 buttons_update_interrupt_sense()
 {
-  char p2val = P2IN;
-  /* update switch interrupt to detect changes from current buttons */
-  P2IES |= (p2val & BUTTONS);	/* if switch up, sense down */
-  P2IES &= (p2val | ~BUTTONS);	/* if switch down, sense up */
-  return p2val;
+  // Button is up if bit == 1
+  // So if button is up, set P2IES to 1, to
+  // prepare for a high to low transition.
+  // (when button is pressed).
+  P2IES |= (P2IN & BUTTONS);
+
+  // Button is down if bit == 0
+  // So if button is down, set P2IES to 0, to
+  // prepare for a low to high transition.
+  // (when button is released).
+  P2IES &= (P2IN | ~BUTTONS); 
 }
 
 void 
@@ -19,8 +25,8 @@ buttons_init()			/* setup switch */
 {
   P2OUT |= BUTTONS;
   
-  P2REN = BUTTONS;		/* enables resistors for switches */
-  P2IE |= BUTTONS;		/* enable interrupts from switches */
+  P2REN |= BUTTONS;		/* enables resistors for switches */
+  P2IE = BUTTONS;		/* enable interrupts from switches */
   P2OUT |= BUTTONS;		/* pull-ups for switches */
   P2DIR &= ~BUTTONS;		/* set switches' bits for input */
   buttons_update_interrupt_sense();
@@ -30,7 +36,7 @@ buttons_init()			/* setup switch */
 void
 buttons_interrupt_handler()
 {
-  char p1val = buttons_update_interrupt_sense();
-  button_state_down = (p1val & BTN1) ? 0 : 1; /* 0 when SW1 is up */
-  button_state_changed = 1;
+  buttons_update_interrupt_sense();
+  // If P2IN.x == 0, then button was pressed.
+  button_state_down = (P2IN & BUTTONS) ? 1 : 0;
 }
