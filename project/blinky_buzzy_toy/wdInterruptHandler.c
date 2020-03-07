@@ -5,10 +5,7 @@
 
 char game_num = 1;
 signed char frequency_btn = -1;
-
-void high_pitch() {
-  buzzer_set_period(1000000, 1);
-}
+unsigned char light_speed = 150;
 
 void fur_elise_sound(){
   short sound_notes[] = {1,2,1,2,1,3,4,5,6};
@@ -16,11 +13,11 @@ void fur_elise_sound(){
   static int blink_count = 0;
   
   if (++blink_count > 200) {
-    set_sound2(sound_notes[conductor]);
+    set_sound(sound_notes[conductor]);
     //set_sound();
   }
   if (blink_count > 200 && blink_count < 225) {
-    buzzer_turn_off();
+    set_frequency(1,1);
   }
   if (++blink_count > 225) {
     if (++conductor > 8) {
@@ -29,7 +26,7 @@ void fur_elise_sound(){
     blink_count = 0;
     buzzer_turn_on();
   }
-  
+}  
   
   /*
   if (++blink_count > 200) {
@@ -65,11 +62,11 @@ void fur_elise_sound(){
     blink_count = 0;
   }
   */
-}
+
 
 void find_frequency() {
   static int tick = 0;
-  static rand_frequency = 0;
+  static int rand_frequency = 0;
   static char light_on = 0;
   
   if (tick > 440) {
@@ -80,23 +77,46 @@ void find_frequency() {
   }
   
   if (frequency_btn == -1) {
-    turn_on_green();
+    //turn_on_green();
     rand_frequency = (tick % (33000 + 1 - 500)) + 500;
     frequency_btn = (tick % (3 + 1 - 1)) + 1;
+    //frequency_btn = 0xe;
+    
+    switch (frequency_btn) {
+    case 1:
+      frequency_btn = 0xe;
+      break;
+    case 2:
+      frequency_btn = 0xd;
+      break;
+    case 3:
+      frequency_btn = 0xb;
+      break;
+    }
+    
   }
+  /*
   else {
     turn_off_red();
     turn_off_green();
-  }
+    }*/
   buzzer_set_period(rand_frequency, 1);
 }
 
-void catch_red(){
+void catch_red() {
+  static char blink_count = 0;
 
+  
+  if (++blink_count == light_speed) {
+    state_advance();
+    blink_count = 0;
+  }
+  
+  
 }
 
 void
-__interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
+__interrupt_vec(WDT_VECTOR) WDT() {	/* 250 interrupts/sec */
   
   if (game_num == 1) {
     fur_elise_sound();
@@ -105,21 +125,12 @@ __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
     find_frequency();
   }
   else if (game_num == 3) {
+   
+    //buzzer_turn_off();
     catch_red();
+    
   }
-}
-
-void button_init()
-{
-  // Open transmission gate for b0.
-  //P2DIR |= 1;		// bits attached to leds are output
-  //P2REN &= 1;
-  
-  P2OUT |= 9;
-  
-  P2REN |= 9;		/* enables resistors for switches */
-  P2IE = 9;		/* enable interrupts from switches */
-  P2OUT |= 9;		/* pull-ups for switches */
-  P2DIR &= ~9;		/* set switches' bits for input */
-
+  else {
+    turn_on_red();
+  }
 }

@@ -3,6 +3,7 @@
 #include "wdInterruptHandler.h"
 #include "stateMachines.h"
 #include "buzzer.h"
+#include "led.h"
 
 void frequency_recovery() {
   if ((P2IN & BUTTONS) == 0x7) {
@@ -65,6 +66,20 @@ void frequency_recovery() {
   */
 }
 
+void game_three_interrupt_handler() {
+  if ((P2IN & BUTTONS) == (~BTN2 & BUTTONS)) {
+    game_num = 4;
+  }
+  else if ((P2IN & BUTTONS) == (~BTN4 & BUTTONS)) {
+    if (red_on) {
+      light_speed -= 5;
+    }
+    if (!red_on || light_speed <= 15) {
+      light_speed = 150;
+    }
+  }
+}
+
 void game_one_interrupt_handler() {
   if ((P2IN & BIT0) == 0) {
     game_num = 2;
@@ -87,6 +102,9 @@ __interrupt_vec(PORT2_VECTOR) Port_2() {
     }
     else if (game_num == 2) {
       frequency_recovery();
+    }
+    else if (game_num == 3) {
+      game_three_interrupt_handler();
     }
     buttons_interrupt_handler();
   }
