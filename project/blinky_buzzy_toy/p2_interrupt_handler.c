@@ -66,6 +66,52 @@ void frequency_recovery() {
   */
 }
 
+void game_four_interrupt_handler() {
+  if ((P2IN & BUTTONS) == (~BTN3 & BUTTONS)) {
+    game_num = 1;
+  }
+  else if (wait_for_pattern) {
+    if ((P2IN & 0xf) == 0x7) {
+      turn_on_red();
+    }
+    else if ((P2IN & 0xf) == 0xe) {
+      turn_on_green();
+    }
+    else {
+      turn_off_green();
+      turn_off_red();
+    }
+  
+    /*
+
+    if ((P2IN & BUTTONS) == (~BTN1 & BUTTONS)) {
+      if (game_pattern[curr_pattern] == 0) {
+	curr_pattern++;
+	if (curr_pattern >= 6) {
+	  curr_pattern = 0;
+	}
+      }
+      else {
+	curr_pattern = 0;
+      }
+      add_pattern = 1;
+    }
+    if ((P2IN & BUTTONS) == (~BTN4 & BUTTONS)) {
+      if (game_pattern[curr_pattern] == 1) {
+	curr_pattern++;
+	if (curr_pattern >= 6) {
+	  curr_pattern = 0;
+	}
+      }
+      else {
+	curr_pattern = 0;
+      }
+      add_pattern = 1;
+    }
+    */
+  }
+}
+
 void game_three_interrupt_handler() {
   if ((P2IN & BUTTONS) == (~BTN2 & BUTTONS)) {
     game_num = 4;
@@ -105,6 +151,9 @@ __interrupt_vec(PORT2_VECTOR) Port_2() {
     }
     else if (game_num == 3) {
       game_three_interrupt_handler();
+    }
+    else {
+      game_four_interrupt_handler();
     }
     buttons_interrupt_handler();
   }
