@@ -138,8 +138,7 @@ void simon() {
     print_pattern = display_pattern();
   }
   if (wait_for_pattern) {
-    //turn_off_green();
-    //turn_off_red();
+    
   }
 }
 
@@ -151,17 +150,18 @@ char display_pattern() {
     turn_off_red();
   }
   blink_count++;
-  if (blink_count == 30) {
+  if (blink_count == 100) {
     red_on = (game_pattern[curr_index]) ? 1 : 0;
     green_on = (red_on) ? 0: 1;
     led_change();
   }
-  if (blink_count == 170) {
+  if (blink_count == 225) {
     blink_count = 0;
     curr_index++;
     turn_off_red();
     turn_off_green();
     if (curr_index > curr_pattern) {
+      curr_pattern = 0;
       wait_for_pattern = 1;
       curr_index = 0;
       return 0;

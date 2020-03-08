@@ -78,37 +78,54 @@ void game_four_interrupt_handler() {
       turn_on_green();
     }
     else {
+      if (green_on) {
+
+	// If curr_pattern == 0, then should press
+	// green.
+	if (game_pattern[curr_pattern] == 0) {
+	  curr_pattern++;
+	  if (curr_pattern >= 5) {
+	    curr_pattern = 0;
+	    wait_for_pattern = 0;
+	    add_pattern = 1;
+	  }
+	  else if (game_pattern[curr_pattern] == 2) {
+	    add_pattern = 1;
+	    wait_for_pattern = 0;
+	  }
+	}
+	else {
+	  curr_pattern = 0;
+	  wait_for_pattern = 0;
+	  add_pattern = 1;
+	}
+      }
+
+      else if (red_on) {
+	// If curr_pattern == 1, then should
+	// press red.
+	if (game_pattern[curr_pattern] == 1) {
+	  curr_pattern++;
+	  if (curr_pattern >= 5) {
+	    curr_pattern = 0;
+	    wait_for_pattern = 0;
+	    add_pattern = 1;
+	  }
+	  else if (game_pattern[curr_pattern] == 2) {
+	    add_pattern = 1;
+	    wait_for_pattern = 0;
+	  }
+	}
+	else {
+	  curr_pattern = 0;
+	  wait_for_pattern = 0;
+	  add_pattern = 1;
+	}  
+      }
+    
       turn_off_green();
       turn_off_red();
-    }
-  
-    /*
-
-    if ((P2IN & BUTTONS) == (~BTN1 & BUTTONS)) {
-      if (game_pattern[curr_pattern] == 0) {
-	curr_pattern++;
-	if (curr_pattern >= 6) {
-	  curr_pattern = 0;
-	}
-      }
-      else {
-	curr_pattern = 0;
-      }
-      add_pattern = 1;
-    }
-    if ((P2IN & BUTTONS) == (~BTN4 & BUTTONS)) {
-      if (game_pattern[curr_pattern] == 1) {
-	curr_pattern++;
-	if (curr_pattern >= 6) {
-	  curr_pattern = 0;
-	}
-      }
-      else {
-	curr_pattern = 0;
-      }
-      add_pattern = 1;
-    }
-    */
+    }   
   }
 }
 
