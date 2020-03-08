@@ -2,10 +2,13 @@
 #include "stateMachines.h"
 #include "buzzer.h"
 #include "wdInterruptHandler.h"
+#include "led.h"
 
 char game_num = 1;
 signed char frequency_btn = -1;
 unsigned char light_speed = 150;
+
+char display_pattern();
 
 void fur_elise_sound(){
   short sound_notes[] = {1,2,1,2,1,3,4,5,6};
@@ -105,14 +108,66 @@ void find_frequency() {
 
 void catch_red() {
   static char blink_count = 0;
-
   
   if (++blink_count == light_speed) {
     state_advance();
     blink_count = 0;
   }
+}
+
+unsigned char add_pattern = 1;
+unsigned char curr_pattern = 0;
+unsigned char wait_for_pattern = 0;
+unsigned char game_pattern[6];
+
+void simon() {
+  buzzer_set_period(0,0);
+  static char tick = 0;
+ 
+  static char print_pattern = 0;
+  static char feeder[] = {0,1,0,1,0};
   
+  if (add_pattern) {
+    game_pattern[curr_pattern] = feeder[curr_pattern]; 
+    game_pattern[curr_pattern + 1] = 2;
+    print_pattern = 1;
+    add_pattern = 0;
+  }
   
+  if (print_pattern) {
+    print_pattern = display_pattern();
+  }
+  if (wait_for_pattern) {
+    //turn_off_green();
+    //turn_off_red();
+  }
+}
+
+char display_pattern() {
+  static int blink_count= 0;
+  static unsigned char curr_index;
+  if (blink_count == 0) {
+    turn_off_green();
+    turn_off_red();
+  }
+  blink_count++;
+  if (blink_count == 30) {
+    red_on = (game_pattern[curr_index]) ? 1 : 0;
+    green_on = (red_on) ? 0: 1;
+    led_change();
+  }
+  if (blink_count == 170) {
+    blink_count = 0;
+    curr_index++;
+    turn_off_red();
+    turn_off_green();
+    if (curr_index > curr_pattern) {
+      wait_for_pattern = 1;
+      curr_index = 0;
+      return 0;
+    }
+  }
+  return 1;
 }
 
 void
@@ -131,6 +186,6 @@ __interrupt_vec(WDT_VECTOR) WDT() {	/* 250 interrupts/sec */
     
   }
   else {
-    turn_on_red();
+    simon();
   }
 }
