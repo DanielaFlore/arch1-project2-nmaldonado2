@@ -69,6 +69,9 @@ void frequency_recovery() {
 void game_four_interrupt_handler() {
   if ((P2IN & BUTTONS) == (~BTN3 & BUTTONS)) {
     game_num = 1;
+    curr_pattern = 0;
+    add_pattern = 1;
+    wait_for_pattern = 0;
   }
   else if (wait_for_pattern) {
     if ((P2IN & 0xf) == 0x7) {
@@ -84,7 +87,7 @@ void game_four_interrupt_handler() {
 	// green.
 	if (game_pattern[curr_pattern] == 0) {
 	  curr_pattern++;
-	  if (curr_pattern >= 5) {
+	  if (curr_pattern >= 31) {
 	    curr_pattern = 0;
 	    wait_for_pattern = 0;
 	    add_pattern = 1;
@@ -106,7 +109,7 @@ void game_four_interrupt_handler() {
 	// press red.
 	if (game_pattern[curr_pattern] == 1) {
 	  curr_pattern++;
-	  if (curr_pattern >= 5) {
+	  if (curr_pattern >= 31) {
 	    curr_pattern = 0;
 	    wait_for_pattern = 0;
 	    add_pattern = 1;

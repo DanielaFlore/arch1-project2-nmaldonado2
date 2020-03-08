@@ -118,17 +118,21 @@ void catch_red() {
 unsigned char add_pattern = 1;
 unsigned char curr_pattern = 0;
 unsigned char wait_for_pattern = 0;
-unsigned char game_pattern[6];
+unsigned char game_pattern[32];
 
 void simon() {
   buzzer_set_period(0,0);
-  static char tick = 0;
+  static short tick = 0;
  
   static char print_pattern = 0;
-  static char feeder[] = {0,1,0,1,0};
+  if (tick > 225) {
+    tick = 0;
+  }
+  tick++;
   
   if (add_pattern) {
-    game_pattern[curr_pattern] = feeder[curr_pattern]; 
+    //game_pattern[curr_pattern] = feeder[curr_pattern];
+    game_pattern[curr_pattern] = tick % 2;
     game_pattern[curr_pattern + 1] = 2;
     print_pattern = 1;
     add_pattern = 0;
@@ -138,7 +142,7 @@ void simon() {
     print_pattern = display_pattern();
   }
   if (wait_for_pattern) {
-    
+
   }
 }
 
