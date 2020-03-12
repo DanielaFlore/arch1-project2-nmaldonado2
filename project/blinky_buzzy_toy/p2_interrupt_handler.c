@@ -4,6 +4,9 @@
 #include "stateMachines.h"
 #include "buzzer.h"
 #include "led.h"
+//#include "game_one_two_interrupt_handler.s"
+
+extern void game_three_interrupt_handler();
 
 void frequency_recovery() {
   if ((P2IN & BUTTONS) == 0x7) {
@@ -22,48 +25,6 @@ void frequency_recovery() {
       turn_on_red();
     }
   }
-  /*
-  if ((P2IN & BIT0) == 0) {
-    //turn_on_red();
-    //turn_off_green();
-  }
-  else if ((P2IN & BIT1) == 0) {
-    //turn_on_red();
-  }
-  else if ((P2IN & BIT2) == 0) {
-    //turn_on_red();
-  }
-  else {
-    //turn_off_green();
-    //turn_off_red();
-  }
-  */
-  /*
-  if (P2IFG & BIT3) {
-    P2IFG &= ~BIT3;
-    //turn_on_red();
-    buzzer_turn_off();
-    game_num = 3;
-  }
-  else if ((P2IFG & BTN1) && frequency_btn == 1) {
-    P2IFG &= ~BTN1;
-    frequency_btn = -1;
-    
-  }
-  // BTN 2 pressed.
-  else if ((P2IFG & BTN2) && frequency_btn == 2) {
-    P2IFG &= ~BTN2;
-    frequency_btn = -1;
-  }
-  else if ((P2IFG & BTN3) && frequency_btn == 3) {
-    P2IFG &= ~BTN3;
-    frequency_btn = -1;
-  }
-  else {
-    turn_on_red();
-    P2IFG &= ~BUTTONS;
-  }
-  */
 }
 
 void game_four_interrupt_handler() {
@@ -131,7 +92,7 @@ void game_four_interrupt_handler() {
     }   
   }
 }
-
+/*
 void game_three_interrupt_handler() {
   if ((P2IN & BUTTONS) == (~BTN2 & BUTTONS)) {
     game_num = 4;
@@ -145,7 +106,7 @@ void game_three_interrupt_handler() {
     }
   }
 }
-
+*/
 void game_one_interrupt_handler() {
   if ((P2IN & BIT0) == 0) {
     game_num = 2;
@@ -155,12 +116,6 @@ void game_one_interrupt_handler() {
 /* Switch on P2 */
 void
 __interrupt_vec(PORT2_VECTOR) Port_2() {
-  //buttons_interrupt_handler();
-  /*
-  if (game_num == 1) {
-    game_one_interrupt_handler();
-  }
-  */
   if (P2IFG & BUTTONS) {
     P2IFG &= ~BUTTONS;
     if (game_num == 1) {
@@ -177,48 +132,4 @@ __interrupt_vec(PORT2_VECTOR) Port_2() {
     }
     buttons_interrupt_handler();
   }
-  /*
-  if (button_state_down) {
-    turn_on_red();
-    turn_off_green();
-  }
-  else {
-    turn_on_green();
-    turn_off_red();
-  }
-  */
-  /*
-  else if (game_num == 2) {
-    frequency_recovery();
-  }
-  */
-  //enableWDTInterrupts();
-  //turn_off_green();
-  // only button 1 is pressed.
-  /*
-  if ((P2IFG & BTN1) && game_num == 1) {
-    P2IFG &= ~BIT0;  
-    game_num = 2;
-    return;
-  }
-  */
-
-  // If the game number is 2 and the fourth
-  // button has not been pressed.
-  /*
-  if (~(P2IFG & BIT3) == 0 && game_num == 2) {
-    frequency_recovery();
-    return;
-  }
-  if (P2IFG & BIT3) {
-    turn_red_on();
-    return;
-  }
-  if ((P2IFG & BIT3) && game_num == 2) {
-    P2IFG &= ~BTN4;
-    buzzer_turn_off();
-    game_num = 3;
-    
-  }
-  */
 }
