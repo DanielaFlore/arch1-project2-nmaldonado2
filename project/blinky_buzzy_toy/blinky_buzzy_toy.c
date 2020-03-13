@@ -3,6 +3,8 @@
 #include "libTimer.h"
 #include "led.h"
 #include "buzzer.h"
+#include "buttons.h"
+
 int main(void) {
   configureClocks();		/* setup master oscillator, CPU & peripheral clocks */
   led_init();
