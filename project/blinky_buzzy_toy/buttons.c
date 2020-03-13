@@ -30,7 +30,7 @@ buttons_init()			/* setup switch */
   P2OUT |= BUTTONS;		/* pull-ups for switches */
   P2DIR &= ~BUTTONS;		/* set switches' bits for input */
   buttons_update_interrupt_sense();
-  led_update();
+  led_change();
 }
 
 void
