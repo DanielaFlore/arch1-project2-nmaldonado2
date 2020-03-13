@@ -4,7 +4,7 @@
 
 char button_state_down, button_state_changed; /* effectively boolean */
 
-static void
+void
 buttons_update_interrupt_sense()
 {
   // Button is up if bit == 1
@@ -32,11 +32,11 @@ buttons_init()			/* setup switch */
   buttons_update_interrupt_sense();
   led_change();
 }
-
+/*
 void
 buttons_interrupt_handler()
 {
   buttons_update_interrupt_sense();
   // If P2IN.x == 0, then button was pressed.
   button_state_down = (P2IN & BUTTONS) ? 1 : 0;
-}
+}*/
