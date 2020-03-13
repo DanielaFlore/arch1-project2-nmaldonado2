@@ -5,9 +5,10 @@
 #include "led.h"
 #include "simon.h"
 #include "catch_red.h"
+#include "find_frequency.h"
 
 char game_num = 1;
-signed char frequency_btn = -1;
+
 
 void set_light(char conductor_position, char change_dimness) {
   static char dim_light = 0;
@@ -68,40 +69,6 @@ void fur_elise_sound(){
     buzzer_turn_on();
   }
 }  
-
-void find_frequency() {
-  static int tick = 0;
-  static int rand_frequency = 0;
-  static char light_on = 0;
-  
-  if (tick > 440) {
-    tick = 1;
-  }
-  else {
-    tick++;
-  }
-  
-  if (frequency_btn == -1) {
-    //turn_on_green();
-    rand_frequency = (tick % (33000 + 1 - 500)) + 500;
-    frequency_btn = (tick % (3 + 1 - 1)) + 1;
-    //frequency_btn = 0xe;
-    
-    switch (frequency_btn) {
-    case 1:
-      frequency_btn = 0xe;
-      break;
-    case 2:
-      frequency_btn = 0xd;
-      break;
-    case 3:
-      frequency_btn = 0xb;
-      break;
-    }
-    
-  }
-  buzzer_set_period(rand_frequency, 1);
-}
 
 void
 __interrupt_vec(WDT_VECTOR) WDT() {	/* 250 interrupts/sec */

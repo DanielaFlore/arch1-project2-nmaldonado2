@@ -4,6 +4,7 @@
 #include "buttons.h"
 #include "wdInterruptHandler.h"
 #include "simon.h"
+#include "find_frequency.h"
 
 //extern void game_three_interrupt_handler();
 
