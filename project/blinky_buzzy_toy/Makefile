@@ -11,7 +11,7 @@ AS              = msp430-elf-as
 all: blinky_buzzy_toy.elf 
 
 #additional rules for files
-blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o stateMachines.o led.o buzzer.o buttons.o p2_interrupt_handler.o wdInterruptHandler.o ../lib/libTimer.a game_three_to_four_transition.s
+blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o stateMachines.o led.o buzzer.o buttons.o p2_interrupt_handler.o wdInterruptHandler.o simon.o ../lib/libTimer.a game_three_to_four_transition.s
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: blinky_buzzy_toy.elf
@@ -22,12 +22,14 @@ clean:
 
 led.o: led.c led.h
 
-wdInterruptHandler.o: stateMachines.h buzzer.h wdInterruptHandler.c wdInterruptHandler.h led.h
+wdInterruptHandler.o: stateMachines.h buzzer.h wdInterruptHandler.c wdInterruptHandler.h led.h simon.h
 
-stateMachines.o: led.h stateMachines.h stateMachines.c game_three_to_four_transition.s
+stateMachines.o: led.h stateMachines.h stateMachines.c led.h buttons.h wdInterruptHandler.h simon.h
 
 buzzer.o: buzzer.c buzzer.h
 
-p2_interrupt_handler.o: p2_interrupt_handler.c buttons.h stateMachines.h wdInterruptHandler.h
+p2_interrupt_handler.o: p2_interrupt_handler.c buttons.h stateMachines.h wdInterruptHandler.h led.h
 
 buttons.o: buttons.h led.h buttons.c
+
+simon.o: simon.h simon.c led.h buzzer.h

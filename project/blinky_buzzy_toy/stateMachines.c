@@ -3,6 +3,7 @@
 #include "led.h"
 #include "buttons.h"
 #include "wdInterruptHandler.h"
+#include "simon.h"
 
 //extern void game_three_interrupt_handler();
 

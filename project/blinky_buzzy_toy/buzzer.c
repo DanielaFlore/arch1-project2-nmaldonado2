@@ -17,7 +17,7 @@ void buzzer_init()
     P2SEL |= BIT6;
     P2DIR = BIT6;		/* enable output to speaker (P2.6) */
 }
-
+/*
 void buzzer_turn_off() {
 
   // Set bits for p2 sel2 off.
@@ -26,7 +26,7 @@ void buzzer_turn_off() {
   //P2SEL |= BIT6;
   //P2DIR = BIT6;
 }
-
+*/
 void buzzer_turn_on() {
 
   // Set bits for p2 sel2 off.
