@@ -6,6 +6,8 @@
 #include "simon.h"
 #include "find_frequency.h"
 
+char game_num = 1;
+
 //extern void game_three_interrupt_handler();
 
 void frequency_recovery() {

@@ -22,7 +22,7 @@ clean:
 
 led.o: led.c led.h
 
-wdInterruptHandler.o: wdInterruptHandler.c wdInterruptHandler.h led.h simon.h catch_red.h find_frequency.h fur_elise.h
+wdInterruptHandler.o: wdInterruptHandler.c wdInterruptHandler.h led.h simon.h catch_red.h find_frequency.h fur_elise.h stateMachines.h
 
 stateMachines.o: led.h stateMachines.h stateMachines.c led.h buttons.h wdInterruptHandler.h simon.h find_frequency.h
 
