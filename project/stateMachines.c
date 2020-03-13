@@ -7,7 +7,7 @@
 
 char game_num = 1;
 
-//extern void game_three_interrupt_handler();
+//extern unsigned char game_three_interrupt_handler(unsigned char light_speed);
 
 void frequency_recovery() {
   if ((P2IN & BUTTONS) == 0x7) {
@@ -74,4 +74,3 @@ void game_one_interrupt_handler() {
     game_num = 2;
   }
 }
-

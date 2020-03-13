@@ -2,6 +2,8 @@
 #include "buttons.h"
 #include "stateMachines.h"
 #include "led.h"
+#include "catch_red.h"
+
 
 /* Switch on P2 */
 void
@@ -15,7 +17,7 @@ __interrupt_vec(PORT2_VECTOR) Port_2() {
       frequency_recovery();
     }
     else if (game_num == 3) {
-      game_three_interrupt_handler();
+      light_speed = game_three_interrupt_handler(light_speed);
     }
     else {
       game_four_interrupt_handler();

@@ -24,11 +24,11 @@ led.o: led.c led.h
 
 wdInterruptHandler.o: wdInterruptHandler.c led.h games/simon.h games/catch_red.h games/find_frequency.h games/fur_elise.h stateMachines.h
 
-stateMachines.o: led.h stateMachines.h stateMachines.c led.h buttons.h games/simon.h games/find_frequency.h game_three_to_four_transition.s
+stateMachines.o: led.h stateMachines.h stateMachines.c led.h buttons.h games/simon.h games/find_frequency.h games/catch_red.h game_three_to_four_transition.s
 
 buzzer.o: buzzer.c buzzer.h
 
-p2_interrupt_handler.o: p2_interrupt_handler.c buttons.h stateMachines.h led.h
+p2_interrupt_handler.o: p2_interrupt_handler.c buttons.h stateMachines.h led.h games/catch_red.h
 
 buttons.o: buttons.h led.h buttons.c
 
