@@ -17,16 +17,7 @@ void buzzer_init()
     P2SEL |= BIT6;
     P2DIR = BIT6;		/* enable output to speaker (P2.6) */
 }
-/*
-void buzzer_turn_off() {
 
-  // Set bits for p2 sel2 off.
-  P2SEL2 |= (BIT6 | BIT7);
-  P2SEL |= BIT7; 
-  //P2SEL |= BIT6;
-  //P2DIR = BIT6;
-}
-*/
 void buzzer_turn_on() {
 
   // Set bits for p2 sel2 off.
@@ -48,19 +39,7 @@ void buzzer_set_period(short cycles, short mute) /* buzzer clock = 2MHz.  (perio
   // at 10.
   /* one half cycle */
 }
-/*
-void set_sound() {
-  static int turned_on = 1;
-  if (turned_on) {
-    buzzer_turn_off();
-    turned_on = 0;
-  }
-  else {
-    buzzer_turn_on();
-    turned_on = 1;
-  }
-}
-*/
+
 short frequency(short i){
   if (i == 1) {
     return 6000;
@@ -106,19 +85,4 @@ void set_frequency(short cycles, short mute) {
   CCR0 = cycles; 
   CCR1 = cycles >> mute;
 }
-
-/*
-void
-__interrupt_vec(WDT_VECTOR) WDT(){ 
-  static char blink_count = 0;
-
-  //buzzer_init();
-  //buzzer_set_period(10000);
-  //buzzer_turn_on();
-  if (++blink_count >= 25) {
-    set_sound();
-    blink_count = 0;
-  }
-}
-*/
 
