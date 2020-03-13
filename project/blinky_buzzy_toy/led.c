@@ -26,3 +26,31 @@ void led_change()
     P1OUT |= ledFlags;		     // set bit for on leds
    
 }
+
+
+void turn_on_green() {
+  green_on = 1;
+  red_on = 0;
+  led_change();
+}
+
+void turn_on_red() {
+  red_on = 1;
+  green_on = 0;
+  led_change();
+}
+
+void turn_off_green() {
+  green_on = 0;
+  led_change();
+}
+
+void turn_off_red() {
+  red_on = 0;
+  led_change();
+}
+
+void turn_off_green_red() {
+  red_on = green_on = 0;
+  led_change();
+}

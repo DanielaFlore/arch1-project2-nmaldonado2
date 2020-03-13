@@ -7,33 +7,6 @@ void blink_green() {
   led_change();
 }
 
-void turn_on_green() {
-  green_on = 1;
-  red_on = 0;
-  led_change();
-}
-
-void turn_on_red() {
-  red_on = 1;
-  green_on = 0;
-  led_change();
-}
-
-void turn_off_green() {
-  green_on = 0;
-  led_change();
-}
-
-void turn_off_red() {
-  red_on = 0;
-  led_change();
-}
-
-void turn_off_green_red() {
-  red_on = green_on = 0;
-  led_change();
-}
-
 char toggle_green()	/* only toggle green if red is on!  */
 {
   char changed = 0;
@@ -44,15 +17,16 @@ char toggle_green()	/* only toggle green if red is on!  */
   return changed;
 }
 
-void state_advance()		/* alternate between toggling red & green */
-{
-  char changed = 0;  
+void state_advance()
+{ 
   if (!red_on){
+    buzzer_set_period(1000, 1);
     red_on = 1;
     green_on = 0;
     led_change();
   }
   else {
+    buzzer_set_period(9000, 1);
     green_on = 1;
     red_on = 0;
     led_change();
