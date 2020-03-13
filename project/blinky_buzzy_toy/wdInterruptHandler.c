@@ -8,10 +8,9 @@ char game_num = 1;
 signed char frequency_btn = -1;
 unsigned char light_speed = 150;
 
-static char dim_light = 0;
 void set_light(char conductor_position, char change_dimness) {
-  //static char dim_light = 0;
-  //dim_light = (change_dimness) ? dim_light^1 : dim_light;
+  static char dim_light = 0;
+  dim_light = (change_dimness) ? dim_light^1 : dim_light;
   if (dim_light) {
     if (conductor_position % 2 == 0) {
 
@@ -20,8 +19,6 @@ void set_light(char conductor_position, char change_dimness) {
       }
       turn_on_green();
       turn_off_green();
-      // turn_on_green();
-      //turn_off_green();
     }
     else {
       if (green_on) {
@@ -29,8 +26,6 @@ void set_light(char conductor_position, char change_dimness) {
       }
       turn_on_red();
       turn_off_red();
-      //turn_on_red();
-      //turn_off_red();
     }
   }
   else {
@@ -55,7 +50,7 @@ void fur_elise_sound(){
   short sound_notes[] = {1,2,1,2,1,3,4,5,6};
   static char conductor = 0;
   static int blink_count = 0;
-
+  
   if (++blink_count < 200) {
     set_light(conductor, ((blink_count == 1)? 1 : 0));
   }
@@ -72,45 +67,8 @@ void fur_elise_sound(){
     }
     blink_count = 0;
     buzzer_turn_on();
-    dim_light ^= 1;
   }
 }  
-  
-  /*
-  if (++blink_count > 200) {
-    set_sound2(1);
-    blink_count = 0;
-  }
-  */
-  
-  /*
-  if (++blink_count > 200){
-    if (sound_notes[conductor++] == 1) {
-      buzzer_set_period(1000, 1);
-    }
-    else if (sound_notes[conductor++] == 2){
-      high_pitch();
-    }
-    if (conductor > 2) {
-      conductor = 0;
-    }
-    set_sound();
-    blink_green();
-    blink_count = 0;
-  }
-  */
-  /*
-  if (++blink_count < 50) {
-    buzzer_set_period(1000,1);
-  }
-  if (blink_count > 50) {
-    buzzer_set_period(10000, 1);
-  }
-  if (blink_count >= 150) {
-    blink_count = 0;
-  }
-  */
-
 
 void find_frequency() {
   static int tick = 0;
@@ -143,12 +101,23 @@ void find_frequency() {
     }
     
   }
-  /*
-  else {
-    turn_off_red();
-    turn_off_green();
-    }*/
   buzzer_set_period(rand_frequency, 1);
+}
+
+void state_advance()
+{ 
+  if (!red_on){
+    buzzer_set_period(1000, 1);
+    red_on = 1;
+    green_on = 0;
+    led_change();
+  }
+  else {
+    buzzer_set_period(9000, 1);
+    green_on = 1;
+    red_on = 0;
+    led_change();
+  }
 }
 
 void catch_red() {
@@ -195,8 +164,7 @@ char display_pattern() {
   static int blink_count= 0;
   static unsigned char curr_index;
   if (blink_count == 0) {
-    turn_off_green();
-    turn_off_red();
+    turn_off_green_red();
   }
   blink_count++;
   if (blink_count == 200) {
@@ -207,8 +175,7 @@ char display_pattern() {
   if (blink_count == 325) {
     blink_count = 0;
     curr_index++;
-    turn_off_red();
-    turn_off_green();
+    turn_off_green_red();
     if (curr_index > curr_pattern) {
       curr_pattern = 0;
       wait_for_pattern = 1;
