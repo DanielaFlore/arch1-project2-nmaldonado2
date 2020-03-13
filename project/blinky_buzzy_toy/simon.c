@@ -2,44 +2,63 @@
 #include <msp430.h>
 #include "led.h"
 #include "simon.h"
-#include "llist.h"
-#include "led_configs.h"
+#include "buzzer.h"
 
-void light_num(char num){
-  if (num == 1) {
-    timed_green_on(100);
+unsigned char add_pattern = 1;
+unsigned char curr_pattern = 0;
+unsigned char wait_for_pattern = 0;
+unsigned char game_pattern[32];
+
+static char display_pattern();
+
+static char display_pattern() {
+  static int blink_count= 0;
+  static unsigned char curr_index;
+  if (blink_count == 0) {
+    turn_off_green_red();
   }
-  else {
-    timed_red_on(100);
+  blink_count++;
+  if (blink_count == 200) {
+    red_on = (game_pattern[curr_index]) ? 1 : 0;
+    green_on = (red_on) ? 0: 1;
+    led_change();
   }
+  if (blink_count == 325) {
+    blink_count = 0;
+    curr_index++;
+    turn_off_green_red();
+    if (curr_index > curr_pattern) {
+      curr_pattern = 0;
+      wait_for_pattern = 1;
+      curr_index = 0;
+      return 0;
+    }
+  }
+  return 1;
 }
 
-void light_on_based_on_num(List *list){
-  Item *curr = list->root;
-  while (curr && curr->next) {
-    light_num(curr->btn_num);
-    curr = curr->next;
-  }
-
-  char new_light = rand() % (2) + 1;
-  if (!curr) {
-    add_new_head(list, new_light);
-  }
-  else {
-    add_item_after(curr, new_light);
-  }
-  light_num(new_light);
-}
-
-void play_simon() {
-  List *light_pattern = init_llist();
-  int i = 5;
-  while(i-- > 0) {
-    light_on_based_on_num(light_pattern);
+void simon() {
+  buzzer_set_period(0,0);
+  static short tick = 0;
  
-    
-    
+  static char print_pattern = 0;
+  if (tick > 225) {
+    tick = 0;
   }
+  tick++;
+  
+  if (add_pattern) {
+    //game_pattern[curr_pattern] = feeder[curr_pattern];
+    game_pattern[curr_pattern] = tick % 2;
+    game_pattern[curr_pattern + 1] = 2;
+    print_pattern = 1;
+    add_pattern = 0;
+  }
+  
+  if (print_pattern) {
+    print_pattern = display_pattern();
+  }
+  if (wait_for_pattern) {
 
-  free_history(light_pattern);
+  }
 }
