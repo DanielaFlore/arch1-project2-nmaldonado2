@@ -22,13 +22,13 @@ clean:
 
 led.o: led.c led.h
 
-wdInterruptHandler.o: wdInterruptHandler.c wdInterruptHandler.h led.h simon.h catch_red.h find_frequency.h fur_elise.h stateMachines.h
+wdInterruptHandler.o: wdInterruptHandler.c led.h simon.h catch_red.h find_frequency.h fur_elise.h stateMachines.h
 
-stateMachines.o: led.h stateMachines.h stateMachines.c led.h buttons.h wdInterruptHandler.h simon.h find_frequency.h
+stateMachines.o: led.h stateMachines.h stateMachines.c led.h buttons.h simon.h find_frequency.h
 
 buzzer.o: buzzer.c buzzer.h
 
-p2_interrupt_handler.o: p2_interrupt_handler.c buttons.h stateMachines.h wdInterruptHandler.h led.h
+p2_interrupt_handler.o: p2_interrupt_handler.c buttons.h stateMachines.h led.h
 
 buttons.o: buttons.h led.h buttons.c
 

@@ -2,7 +2,6 @@
 #include "stateMachines.h"
 #include "led.h"
 #include "buttons.h"
-#include "wdInterruptHandler.h"
 #include "simon.h"
 #include "find_frequency.h"
 

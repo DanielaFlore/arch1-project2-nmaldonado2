@@ -1,6 +1,5 @@
 #include <msp430.h>
 #include "buttons.h"
-#include "wdInterruptHandler.h"
 #include "stateMachines.h"
 #include "led.h"
 
