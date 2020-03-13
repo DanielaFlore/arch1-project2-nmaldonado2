@@ -1,7 +1,7 @@
 # makfile configuration
 COMMON_OBJECTS  = 
 CPU             = msp430g2553
-CFLAGS          = -mmcu=${CPU} -I../h
+CFLAGS          = -mmcu=${CPU} -I ../../demos/h
 LDFLAGS		= -L/opt/ti/msp430_gcc/include
 
 #switch the compiler (for the internal make rules)
@@ -11,7 +11,7 @@ AS              = msp430-elf-as
 all: blinky_buzzy_toy.elf 
 
 #additional rules for files
-blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o stateMachines.o led.o buzzer.o buttons.o p2_interrupt_handler.o wdInterruptHandler.o simon.o catch_red.o find_frequency.o fur_elise.o ../lib/libTimer.a game_three_to_four_transition.s
+blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o stateMachines.o led.o buzzer.o buttons.o p2_interrupt_handler.o wdInterruptHandler.o simon.o catch_red.o find_frequency.o fur_elise.o ../../demos/lib/libTimer.a game_three_to_four_transition.s
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: blinky_buzzy_toy.elf
