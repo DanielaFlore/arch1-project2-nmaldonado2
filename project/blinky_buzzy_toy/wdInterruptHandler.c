@@ -8,16 +8,60 @@ char game_num = 1;
 signed char frequency_btn = -1;
 unsigned char light_speed = 150;
 
+static char dim_light = 0;
+void set_light(char conductor_position, char change_dimness) {
+  //static char dim_light = 0;
+  //dim_light = (change_dimness) ? dim_light^1 : dim_light;
+  if (dim_light) {
+    if (conductor_position % 2 == 0) {
+
+      if (red_on) {
+	turn_off_red();
+      }
+      turn_on_green();
+      turn_off_green();
+      // turn_on_green();
+      //turn_off_green();
+    }
+    else {
+      if (green_on) {
+	turn_off_green();
+      }
+      turn_on_red();
+      turn_off_red();
+      //turn_on_red();
+      //turn_off_red();
+    }
+  }
+  else {
+    if (conductor_position % 2 == 0) {
+      if (red_on) {
+	turn_off_red();
+      }
+      turn_on_green();
+    }
+    else {
+      if (green_on) {
+	turn_off_green();
+      }
+      turn_on_red();
+    }
+  }
+}
+
 char display_pattern();
 
 void fur_elise_sound(){
   short sound_notes[] = {1,2,1,2,1,3,4,5,6};
-  static int conductor = 0;
+  static char conductor = 0;
   static int blink_count = 0;
+
+  if (++blink_count < 200) {
+    set_light(conductor, ((blink_count == 1)? 1 : 0));
+  }
   
-  if (++blink_count > 200) {
+  if (blink_count > 200) {
     set_sound(sound_notes[conductor]);
-    //set_sound();
   }
   if (blink_count > 200 && blink_count < 225) {
     set_frequency(1,1);
@@ -28,6 +72,7 @@ void fur_elise_sound(){
     }
     blink_count = 0;
     buzzer_turn_on();
+    dim_light ^= 1;
   }
 }  
   
@@ -154,12 +199,12 @@ char display_pattern() {
     turn_off_red();
   }
   blink_count++;
-  if (blink_count == 100) {
+  if (blink_count == 200) {
     red_on = (game_pattern[curr_index]) ? 1 : 0;
     green_on = (red_on) ? 0: 1;
     led_change();
   }
-  if (blink_count == 225) {
+  if (blink_count == 325) {
     blink_count = 0;
     curr_index++;
     turn_off_red();
@@ -184,8 +229,6 @@ __interrupt_vec(WDT_VECTOR) WDT() {	/* 250 interrupts/sec */
     find_frequency();
   }
   else if (game_num == 3) {
-   
-    //buzzer_turn_off();
     catch_red();
     
   }
