@@ -38,3 +38,55 @@ wrong pattern, the game will start from the beginning again. To go back to
 state 1, press BTN3.
 
 ## Project Description
+
+### State 1 - Game 1 - Fur Elise
+The first state/game is a musical arrangement. This game continues to loop
+through a character array with numbers that encode the specific frequency that
+is used to make the sound. While the notes are playing, the lights are also
+shining in a pattern. A green light will be turned on and then the red light
+will be turned on, but dimmed. Then when the song re-loops, the red light will
+turn on, and the green light will be turned on, but dimmed. In order to dim
+the light, I have the light turn turn on and off several times.
+
+### State 2 - Game 2 - Find the Frequency
+The objective of this game is to find the button that is mapped to the current
+pitch playing.  This game has randomized pitches (calculated based on the
+clock ticks), and randomly selects a button (either BTN1, BTN2, or BTN3) that corresponds to the pitch.
+Thus, if the button that maps to the pitch is selected, then a new pitch will
+be played. Again, the user has to find which button matches to this new
+pitch. Once it is found, a new pitch will be played and the cycle will
+continue.
+
+### State 3 - Game 3 - Catch Red
+This game consists of alternating red and green lights that turn on and
+off. The objective of this game is to press BTN4 while the red light is
+shining. If BTN4 is pressed while the red light is on, then the speed of the
+alternating lights will get faster. This sequence will continue until the
+threshold of the light_speed reaches 15, or when the user incorrectly presses
+BTN4 while the red light is not on.
+
+### State 4 - Game 4 - Simon
+This game is the msp430 representation of the well-known game Simon. The
+objective of the game is to correctly enter the pattern of red and green
+lights that the system procures as it repeatedly adds a new stage to the
+pre-existing pattern. When the game first starts off, a red or green light
+will shine. Please wait for the entire pattern to finish displaying and then
+enter the pattern. If you correctly entered the pattern, then a new pattern
+will be added and the cycle will continue. Press BTN1 for the green light and
+BTN4 for the red light
+
+For example, the following is a probable run of Simon:
+1. System shows green light
+2. green light turns off.
+3. user presses BTN1
+4. System shows green light, pauses, and then shows red light
+5. red light turns off
+6. user presses BTN1 and the presses BTN4
+
+This will continue only the max 32 random patterns occur or the user
+incorrectly enters a pattern.
+
+It is also important to note that the msp430 is very sensitive, so accidental
+double button clicks will cause the game to re-start, without you, maybe
+realizing it. I found the best way to avoid this is to lay the msp430 flat on
+the table and press down,
