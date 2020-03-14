@@ -51,13 +51,12 @@ void fur_elise_sound(){
     set_sound(sound_notes[conductor]);
   }
   if (blink_count > 200 && blink_count < 225) {
-    set_frequency(1,1);
+    buzzer_set_period(1,1);
   }
   if (++blink_count > 225) {
     if (++conductor > 8) {
       conductor = 0;
     }
     blink_count = 0;
-    buzzer_turn_on();
   }
 }  

@@ -1,88 +1,101 @@
+// Nichole Maldonado and Previous Commits
+// This file provides functions to initialize
+// the four buttons, and set the sound by
+// adjusting the cycles and mute factor.
+
 #include <msp430.h>
 #include "libTimer.h"
 #include "buzzer.h"
 
+static short frequency(unsigned char note_num);
+
+/*
+ * Function that initializes the buzzer to
+ * be used throughout the program.
+ * Input: None
+ * Output: None
+ */
 void buzzer_init()
 {
-    /* 
-       Direct timer A output "TA0.1" to P2.6.  
-        According to table 21 from data sheet:
-          P2SEL2.6, P2SEL2.7, anmd P2SEL.7 must be zero
-          P2SEL.6 must be 1
-        Also: P2.6 direction must be output
-    */
-    timerAUpmode();		/* used to drive speaker */
-    P2SEL2 &= ~(BIT6 | BIT7);
-    P2SEL &= ~BIT7; 
-    P2SEL |= BIT6;
-    P2DIR = BIT6;		/* enable output to speaker (P2.6) */
-}
-
-void buzzer_turn_on() {
-
-  // Set bits for p2 sel2 off.
+    
+  // Direct timer A output "TA0.1" to P2.6.  
+  // According to table 21 from data sheet:
+  // P2SEL2.6, P2SEL2.7, anmd P2SEL.7 must be zero
+  // P2SEL.6 must be 1
+  // Also: P2.6 direction must be output
+  // Used to drive speaker.
+  timerAUpmode();
+  
   P2SEL2 &= ~(BIT6 | BIT7);
   P2SEL &= ~BIT7; 
-  //P2SEL |= BIT6;
-  //P2DIR = BIT6;
+  P2SEL |= BIT6;
+
+  // Enable output to speaker.
+  P2DIR = BIT6;
 }
 
-void buzzer_set_period(short cycles, short mute) /* buzzer clock = 2MHz.  (period of 1k results in 2kHz tone) */
+/*
+ * Function that sets the buzzer period where
+ * the buzzer clock is at 2MHz (period of 1k
+ * results in 2kHz tone).
+ * Input: The number of cycles and the mute
+ *        which represents the number of bits
+ *        the cycle is shifted.
+ * Output: None.
+ */
+void buzzer_set_period(short cycles, char mute) 
 {
 
   CCR0 = cycles; 
   CCR1 = cycles >> mute;
-  
-  
-  // >> larger number makes it deeper
-  // >> larger number makes it quiter. very mute
-  // at 10.
-  /* one half cycle */
 }
 
-short frequency(short i){
-  if (i == 1) {
-    return 6000;
-  }
-  if (i == 2) {
-    return 7000;
-  }
-  if (i == 3) {
-    return 8000;
-  }
-  if (i == 4) {
-    return 7700;
-  }
-  if (i == 5) {
-    return 7850;
-  }
-  return 22000;
-}
-short pitch(short i) {
-  /*if (i == 1) {
-    return 1;
-  }
-  if (i == 2) {
-    return 1;
-    }*/
-  return 1;
-}
+/*
+ * Function that assigns the frequency for 
+ * Fur Elise based on the note number.
+ * Input: The note number ranging from 1 - 6.
+ * Output: a Frequency
+ */
+static short frequency(unsigned char note_num)
+{
 
-void set_sound(char i) {
-static int turned_on = 1;
-  if (turned_on) {
+  // Note E
+  if (note_num == 1) {
+    return 2637;
+  }
 
-    set_frequency(frequency(i), pitch(i));
-    turned_on = 0;
+  // Note E flat
+  if (note_num == 2) {
+    return 2489;
   }
-  else {
-    set_frequency(frequency(i), pitch(i));
-    turned_on = 1;
+
+  // Note B
+  if (note_num == 3) {
+    return 1975;
   }
+
+  // Note D
+  if (note_num == 4) {
+    return 2349;
+  }
+
+  // Note C
+  if (note_num == 5) {
+    return 2093;
+  }
+
+  // Note A
+  return 1760;
 }
 
-void set_frequency(short cycles, short mute) {
-  CCR0 = cycles; 
-  CCR1 = cycles >> mute;
-}
+/*
+ * Function that sets the sound based on
+ * the note number passed in.
+ * Input: The note number ranging from 1 - 6.
+ * Output: None.
+ */
+void set_sound(unsigned char i) {
 
+  // Finds note frequency and sets it.
+  buzzer_set_period(frequency(i), 1);
+}
