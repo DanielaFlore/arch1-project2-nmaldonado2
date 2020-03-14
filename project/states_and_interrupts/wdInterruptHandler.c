@@ -1,3 +1,9 @@
+// Nichole Maldonado
+// This file contains the main function
+// that has 250 interrupts/sec and calls the
+// corresponding game function based on the
+// game_num.
+
 #include <msp430.h>
 #include "stateMachines.h"
 #include "simon.h"
