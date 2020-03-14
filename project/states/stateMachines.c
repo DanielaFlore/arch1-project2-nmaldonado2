@@ -7,7 +7,6 @@
 #include "catch_red.h"
 char game_num = 1;
 
-//extern unsigned char game_three_interrupt_handler(unsigned char light_speed);
 
 void frequency_recovery() {
   if ((P2IN & BUTTONS) == 0x7) {

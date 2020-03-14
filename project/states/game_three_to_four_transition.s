@@ -13,13 +13,13 @@ else_if:
 	jnz end
 	cmp.b #0, &red_on	;red_on - 0
 	jz second_nested_if	;jmp if red_on == 0
-	sub #0x5, r12
+	sub.b #0x5, &light_speed
 second_nested_if:
 	cmp.b #0, &red_on
 	jnz end
 	mov #15, r13
-	cmp.b r12, r13
+	cmp.b &light_speed, r13
 	jc end
-	mov.b #150, r12
+	mov.b #150, &light_speed
 end:	
 	ret
