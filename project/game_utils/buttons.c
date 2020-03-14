@@ -1,11 +1,21 @@
+// Nichole Maldonado and Previous commits
+// This file includes functions to set
+// the buttons by using the pull up_resitors.
+// If a button is pressed, the IES is set to
+// sense an up transition, and vice versa.
+
 #include <msp430.h>
 #include "buttons.h"
-#include "led.h"
 
-char button_state_down, button_state_changed; /* effectively boolean */
-
-void
-buttons_update_interrupt_sense()
+/*
+ * This function sets the IES to sense a
+ * transition from high to low, if the previous
+ * transition was from low to high, and vice
+ * versa.
+ * Input: None
+ * Output: None
+ */
+void buttons_update_interrupt_sense()
 {
   // Button is up if bit == 1
   // So if button is up, set P2IES to 1, to
@@ -20,23 +30,21 @@ buttons_update_interrupt_sense()
   P2IES &= (P2IN | ~BUTTONS); 
 }
 
-void 
-buttons_init()			/* setup switch */
+void buttons_init()
 {
   P2OUT |= BUTTONS;
   
-  P2REN |= BUTTONS;		/* enables resistors for switches */
-  P2IE = BUTTONS;		/* enable interrupts from switches */
-  P2OUT |= BUTTONS;		/* pull-ups for switches */
-  P2DIR &= ~BUTTONS;		/* set switches' bits for input */
+  // Enable resistors for buttons
+  P2REN |= BUTTONS;
+
+  // Enable interrupts from buttons.
+  P2IE = BUTTONS;
+
+  // Enable pull-ups for buttons.
+  P2OUT |= BUTTONS;
+
+  // Close P1DIR transmission gate for buttons.
+  P2DIR &= ~BUTTONS;
+  
   buttons_update_interrupt_sense();
-  led_change();
 }
-/*
-void
-buttons_interrupt_handler()
-{
-  buttons_update_interrupt_sense();
-  // If P2IN.x == 0, then button was pressed.
-  button_state_down = (P2IN & BUTTONS) ? 1 : 0;
-}*/
