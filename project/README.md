@@ -1,7 +1,7 @@
-#Lab 2: Blinky-Buzzy-Toy
+# Lab 2: Blinky-Buzzy-Toy
 
-##Instructions
+## Instructions
 
-##Location
+## Location
 
-##Project Description
+## Project Description
