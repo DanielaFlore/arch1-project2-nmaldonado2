@@ -4,7 +4,7 @@
 #include "buttons.h"
 #include "simon.h"
 #include "find_frequency.h"
-
+#include "catch_red.h"
 char game_num = 1;
 
 //extern unsigned char game_three_interrupt_handler(unsigned char light_speed);
