@@ -6,6 +6,7 @@ game_three_interrupt_handler:
 	and.b &P2IN, r13 
 	cmp.b #0xd, r13
 	jnz else_if
+	mov.b #150, &light_speed
 	mov.b #4, &game_num
 	jmp end
 else_if:
