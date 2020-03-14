@@ -34,7 +34,22 @@ void find_frequency() {
   // button mapping.
   if (frequency_btn == -1) {
     rand_frequency = (tick % (33000 + 1 - 500)) + 500;
-    frequency_btn = (tick % (3 + 1 - 1)) + 1;  
+    frequency_btn = (tick % (3 + 1 - 1)) + 1;
+
+    // Maps the frequency button from 1 - 3
+    // to the actual button pressed representation
+    // with the bits.
+    switch (frequency_btn) {
+    case 1:
+      frequency_btn = 0xe;
+      break;
+    case 2:
+      frequency_btn = 0xd;
+      break;
+    case 3:
+      frequency_btn = 0xb;
+      break;
+    }
   }
   buzzer_set_period(rand_frequency, 1);
 }
