@@ -33,8 +33,12 @@ void find_frequency() {
   // random frequency and assign it a random
   // button mapping.
   if (frequency_btn == -1) {
-    rand_frequency = (tick % (33000 + 1 - 500)) + 500;
-    frequency_btn = (tick % (3 + 1 - 1)) + 1;
+
+    // Range from [500, 33000]
+    rand_frequency = (tick % 32501) + 500;
+
+    // Range from [3, 1]
+    frequency_btn = (tick % 3) + 1;
 
     // Maps the frequency button from 1 - 3
     // to the actual button pressed representation
