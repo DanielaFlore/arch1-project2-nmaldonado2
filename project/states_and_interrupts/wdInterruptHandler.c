@@ -5,9 +5,17 @@
 #include "find_frequency.h"
 #include "fur_elise.h"
 
-void
-__interrupt_vec(WDT_VECTOR) WDT() {	/* 250 interrupts/sec */
-  
+/*
+ * Function that moves based on the clock
+ * and has 250 interrupts/sec. Based on the
+ * game_num, the corresponding state/game
+ * is played.
+ * Input: None.
+ * Output: None.
+ */
+void __interrupt_vec(WDT_VECTOR) WDT()
+{
+  // Plays game based on game_num/state.
   if (game_num == 1) {
     fur_elise_sound();
   }
