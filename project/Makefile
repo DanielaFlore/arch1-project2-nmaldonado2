@@ -36,7 +36,7 @@ stateMachines.o: game_utils/led.h states_and_interrupts/stateMachines.h states_a
 buzzer.o: game_utils/buzzer.c game_utils/buzzer.h ../demos/timerLib/libTimer.h
 	msp430-elf-gcc -mmcu=msp430g2553 -c -I../demos/timerLib game_utils/buzzer.c
 
-p2_interrupt_handler.o: states_and_interrupts/p2_interrupt_handler.c game_utils/buttons.h states_and_interrupts/stateMachines.h game_utils/led.h games/catch_red.h
+p2_interrupt_handler.o: states_and_interrupts/p2_interrupt_handler.c game_utils/buttons.h states_and_interrupts/stateMachines.h
 	msp430-elf-gcc -mmcu=msp430g2553 -c -Igames -Istates_and_interrupts -Igame_utils states_and_interrupts/p2_interrupt_handler.c
 
 buttons.o: game_utils/buttons.h game_utils/buttons.c
