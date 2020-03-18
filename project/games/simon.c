@@ -33,6 +33,7 @@ static char display_pattern() {
   static unsigned char curr_index;
 
   if (blink_count == 0) {
+    buzzer_set_period(0, 0);
     turn_off_green_red();
   }
   blink_count++;
@@ -43,6 +44,14 @@ static char display_pattern() {
     red_on = (game_pattern[curr_index]) ? 1 : 0;
     green_on = (red_on) ? 0: 1;
     led_change();
+    
+    // Set buzzers
+    if (red_on) {
+      buzzer_set_period(900, 2);
+    }
+    else {
+      buzzer_set_period(1200, 1);
+    }
   }
 
   // If blink_count is 325, then
@@ -51,6 +60,8 @@ static char display_pattern() {
   else if (blink_count == 325) {
     blink_count = 0;
     curr_index++;
+
+    buzzer_set_period(0, 0);
     turn_off_green_red();
 
     // If the entire pattern has been printed,
@@ -68,7 +79,6 @@ static char display_pattern() {
 void simon() {
 
   // Mute the buzzer.
-  buzzer_set_period(0,0);
   static short tick = 0;
   static char print_pattern = 0;
 

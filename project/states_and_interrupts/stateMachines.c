@@ -78,11 +78,13 @@ void game_four_interrupt_handler() {
     // If BTN4 is pressed, turn on red.
     if ((P2IN & BUTTONS) == (~BTN4 & BUTTONS)) {
       turn_on_red();
+      buzzer_set_period(900, 2);
     }
 
     // If BTN3 is pressed, turn on green.
     else if ((P2IN & 0xf) == 0xe) {
       turn_on_green();
+      buzzer_set_period(1200, 1);
     }
 
     // Otherwise, if button is released, analyze.
@@ -116,7 +118,8 @@ void game_four_interrupt_handler() {
         wait_for_pattern = 0;
         add_pattern = 1;
       }
-    
+      
+      buzzer_set_period(0,0);
       turn_off_green_red();
     }   
   }
