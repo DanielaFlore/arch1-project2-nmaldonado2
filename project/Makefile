@@ -21,35 +21,35 @@ clean:
 	rm -f *.o *.elf
 
 blinky_buzzy_toy.o: ../demos/timerLib/libTimer.h game_utils/led.h game_utils/buzzer.h game_utils/buttons.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -I../demos/timerLib -Igame_utils blinky_buzzy_toy.c
+	${CC} ${CFLAGS} -c -I../demos/timerLib -Igame_utils blinky_buzzy_toy.c
 
 
 led.o: game_utils/led.c game_utils/led.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -Igame_utils game_utils/led.c
+	${CC} ${CFLAGS} -c -Igame_utils game_utils/led.c
 
 wdInterruptHandler.o: states_and_interrupts/wdInterruptHandler.c game_utils/led.h games/simon.h games/catch_red.h games/find_frequency.h games/fur_elise.h states_and_interrupts/stateMachines.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -Istates_and_interrupts -Igames -Igame_utils states_and_interrupts/wdInterruptHandler.c
+	${CC} ${CFLAGS} -c -Istates_and_interrupts -Igames -Igame_utils states_and_interrupts/wdInterruptHandler.c
 
 stateMachines.o: game_utils/led.h states_and_interrupts/stateMachines.h states_and_interrupts/stateMachines.c game_utils/buttons.h games/simon.h games/find_frequency.h games/catch_red.h states_and_interrupts/game_three_to_four_transition.s
-	msp430-elf-gcc -mmcu=msp430g2553 -c -Igames -Istates_and_interrupts -Igame_utils states_and_interrupts/stateMachines.c
+	${CC} ${CFLAGS} -c -Igames -Istates_and_interrupts -Igame_utils states_and_interrupts/stateMachines.c
 
 buzzer.o: game_utils/buzzer.c game_utils/buzzer.h ../demos/timerLib/libTimer.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -I../demos/timerLib game_utils/buzzer.c
+	${CC} ${CFLAGS} -c -I../demos/timerLib game_utils/buzzer.c
 
 p2_interrupt_handler.o: states_and_interrupts/p2_interrupt_handler.c game_utils/buttons.h states_and_interrupts/stateMachines.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -Igames -Istates_and_interrupts -Igame_utils states_and_interrupts/p2_interrupt_handler.c
+	${CC} ${CFLAGS} -c -Igames -Istates_and_interrupts -Igame_utils states_and_interrupts/p2_interrupt_handler.c
 
 buttons.o: game_utils/buttons.h game_utils/buttons.c
-	msp430-elf-gcc -mmcu=msp430g2553 -c -I./ -Igame_utils game_utils/buttons.c
+	${CC} ${CFLAGS} -c -I./ -Igame_utils game_utils/buttons.c
 
 simon.o: games/simon.h games/simon.c game_utils/led.h game_utils/buzzer.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -I./ -Igame_utils -Iled games/simon.c
+	${CC} ${CFLAGS} -c -I./ -Igame_utils -Iled games/simon.c
 
 catch_red.o: games/catch_red.h games/catch_red.c game_utils/led.h game_utils/buzzer.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -I./ -Igame_utils -Igames games/catch_red.c
+	${CC} ${CFLAGS} -c -I./ -Igame_utils -Igames games/catch_red.c
 
 find_frequency.o: games/find_frequency.h games/find_frequency.c game_utils/buzzer.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -I./ -Igame_utils games/find_frequency.c
+	${CC} ${CFLAGS} -c -I./ -Igame_utils games/find_frequency.c
 
 fur_elise.o: games/fur_elise.h games/fur_elise.c game_utils/buzzer.h game_utils/led.h
-	msp430-elf-gcc -mmcu=msp430g2553 -c -I./ -Igame_utils games/fur_elise.c
+	${CC} ${CFLAGS} -c -I./ -Igame_utils games/fur_elise.c

@@ -11,6 +11,7 @@
 #include "simon.h"
 #include "find_frequency.h"
 #include "catch_red.h"
+#include "buzzer.h"
 
 char game_num = 1;
 
