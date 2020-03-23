@@ -9,6 +9,11 @@ states.
 3. states_and_interrupts - source and header files for the state transitions
 and interrupt handlers.
 
+## Button Mapping
+
+In the instructions listed below, it is important to note that BTN1, BTN2,
+BTN3, and BTN4 correspond to the S1, S2, S3, and S4 buttons on the msp430 accordingly.
+
 ## Instructions
 To run the game, please follow the instructions lisited below:
 1. Go to demos/timerLib and type 'make install'
@@ -26,7 +31,7 @@ move to the next state, press BTN4.
 objective is to press BTN4 every time the red light blinks. If you continue to
 hit the button at this time, the lights will incrementally get faster. If you
 incorrectly hit BTN4 when the red light is not shining, the game will
-restart. To move to the next state press BTN3.
+restart. To move to the next state press BTN2.
 6. The fourth state, representing the fourth game is simon. The game in total
 has 32 random moves that build up successively. First, the game will blink a
 light and wait for you to press a button. If the light was green then press
@@ -50,6 +55,8 @@ will be turned on, but dimmed. Then when the song re-loops, the red light will
 turn on, and the green light will be turned on, but dimmed. In order to dim
 the light, I have the light turn turn on and off several times.
 
+To exit, press BTN1.
+
 ### State 2 - Game 2 - Find the Frequency
 The objective of this game is to find the button that is mapped to the current
 pitch playing.  This game has randomized pitches (calculated based on the
@@ -59,6 +66,8 @@ be played. Again, the user has to find which button matches to this new
 pitch. Once it is found, a new pitch will be played and the cycle will
 continue.
 
+To exit, press BTN4.
+
 ### State 3 - Game 3 - Catch Red
 This game consists of alternating red and green lights that turn on and
 off. The objective of this game is to press BTN4 while the red light is
@@ -66,6 +75,8 @@ shining. If BTN4 is pressed while the red light is on, then the speed of the
 alternating lights will get faster. This sequence will continue until the
 threshold of the light_speed reaches 15, or when the user incorrectly presses
 BTN4 while the red light is not on.
+
+To exit, press BTN2.
 
 ### State 4 - Game 4 - Simon
 This game is the msp430 representation of the well-known game Simon. The
@@ -87,6 +98,13 @@ For example, the following is a probable run of Simon:
 
 This will continue only the max 32 random patterns occur or the user
 incorrectly enters a pattern.
+
+In the event that a incorrect pattern is entered,
+the game will restart with a single pattern being displayed.
+
+To exit, press BTN3.
+
+###Tips
 
 It is also important to note that the msp430 is very sensitive, so accidental
 double button clicks will cause the game to re-start, without you, maybe

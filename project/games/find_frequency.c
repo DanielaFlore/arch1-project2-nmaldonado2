@@ -34,8 +34,8 @@ void find_frequency() {
   // button mapping.
   if (frequency_btn == -1) {
 
-    // Range from [500, 33000]
-    rand_frequency = (tick % 32501) + 500;
+    // Range from [500, 15000]
+    rand_frequency = (tick % 15000) + 500;
 
     // Range from [3, 1]
     frequency_btn = (tick % 3) + 1;
