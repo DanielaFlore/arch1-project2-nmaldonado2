@@ -37,6 +37,8 @@ the new pattern (BTN1 for green, BTN2 for red). If you incorrectly enter the
 wrong pattern, the game will start from the beginning again. To go back to
 state 1, press BTN3.
 
+NOTE: type 'make clean' to remove all *.o and *.elf files.
+
 ## Project Description
 
 ### State 1 - Game 1 - Fur Elise
