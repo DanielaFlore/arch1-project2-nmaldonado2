@@ -8,7 +8,9 @@ LDFLAGS		= -L/opt/ti/msp430_gcc/include
 CC              = msp430-elf-gcc
 AS              = msp430-elf-as
 
-all: blinky_buzzy_toy.elf 
+all:
+	(cd ../demos/timerLib; make install)
+	(make load)
 
 #additional rules for files
 blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o stateMachines.o led.o catch_red.o buzzer.o buttons.o p2_interrupt_handler.o wdInterruptHandler.o simon.o find_frequency.o fur_elise.o ../demos/lib/libTimer.a states_and_interrupts/game_three_to_four_transition.s
@@ -18,7 +20,9 @@ load: blinky_buzzy_toy.elf
 	msp430loader.sh blinky_buzzy_toy.elf
 
 clean:
+	(cd ../demos/timerLib; make clean)
 	rm -f *.o *.elf
+	rm -rf ../demos/lib ../demos/h
 
 blinky_buzzy_toy.o: ../demos/timerLib/libTimer.h game_utils/led.h game_utils/buzzer.h game_utils/buttons.h
 	${CC} ${CFLAGS} -c -I../demos/timerLib -Igame_utils blinky_buzzy_toy.c
