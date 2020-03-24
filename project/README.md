@@ -7,7 +7,8 @@ directory. The project is further subdivided into three directories:
 states.
 2. game_utils - source and header files for the buzzer, buttons, and led.
 3. states_and_interrupts - source and header files for the state transitions
-and interrupt handlers.
+and interrupt handlers. Also includes the .s file for the state transition
+from game three to four.
 
 ## Button Mapping
 
@@ -19,7 +20,8 @@ To run the game, please follow the instructions lisited below:
 1. In the current directory (project) type 'make'. The timerLib and program will
 consequently be made and the program will be
 downloaded to the msp430.
-2. The first state, representing the first game, is a musical arragement. To
+2. The first state, representing the first game, is a musical arragement and
+it includes lights that change their dimness. To
 continue to the next state, press BTN1.
 3. The second state, representing the second game, is find the button that
 changes the pitch. Essentially, either BTN1, BTN2, or BTN3 are mapped to
