@@ -7,7 +7,7 @@
 #include "libTimer.h"
 #include "buzzer.h"
 
-static short frequency(unsigned char note_num);
+static short cycles(unsigned char note_num);
 
 /*
  * Function that initializes the buzzer to
@@ -51,12 +51,12 @@ void buzzer_set_period(short cycles, char mute)
 }
 
 /*
- * Function that assigns the frequency for 
+ * Function that assigns the number of cycles for 
  * Fur Elise based on the note number.
  * Input: The note number ranging from 1 - 6.
- * Output: a Frequency
+ * Output: the number of cycles
  */
-static short frequency(unsigned char note_num)
+static short cycles(unsigned char note_num)
 {
 
   // Note E
@@ -96,6 +96,6 @@ static short frequency(unsigned char note_num)
  */
 void set_sound(unsigned char i) {
 
-  // Finds note frequency and sets it.
-  buzzer_set_period(frequency(i), 1);
+  // Finds note based on cycles and sets it.
+  buzzer_set_period(cycles(i), 1);
 }
