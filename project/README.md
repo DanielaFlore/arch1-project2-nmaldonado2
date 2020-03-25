@@ -106,7 +106,7 @@ the game will restart with a single pattern being displayed.
 
 To exit, press BTN3.
 
-###Tips
+### Tips
 
 It is also important to note that the msp430 is very sensitive, so accidental
 double button clicks will cause the game to re-start, without you, maybe
