@@ -25,17 +25,19 @@ char game_num = 1;
  * Output: None
  */
 void game_two_interrupt_handler() {
-
+  switch ((P2IN & BUTTONS)) {
+  
   // If BTN4 is pressed, go to next state.
-  if ((P2IN & BUTTONS) == (~BTN4 & BUTTONS)) {
+  case (~BTN4 & BUTTONS):
     game_num = 3;
-  }
+    break;
 
   // If no buttons are pressed, turn off all lights.
-  else if ((P2IN & BUTTONS) == BUTTONS) {
+  case BUTTONS:
     turn_off_green_red();
-  }
-  else {
+    break;
+
+  default:
 
     // If the frequency_btn matches the button
     // pressed turn on green and set frequency_btn
@@ -49,6 +51,7 @@ void game_two_interrupt_handler() {
     else {
       turn_on_red();
     }
+    break;
   }
 }
 
@@ -61,7 +64,8 @@ void game_two_interrupt_handler() {
  * Input: None
  * Output: None
  */
-void game_four_interrupt_handler() {
+void game_four_interrupt_handler()
+{
 
   // If BTN3 is pressed, got to next state,
   // or namely state 1.
@@ -133,7 +137,8 @@ void game_four_interrupt_handler() {
  * Input: None
  * Output: None
  */
-void game_one_interrupt_handler() {
+void game_one_interrupt_handler()
+{
   if ((P2IN & BIT0) == 0) {
     game_num = 2;
   }
