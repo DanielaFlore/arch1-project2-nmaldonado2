@@ -6,7 +6,6 @@ LDFLAGS		= -L/opt/ti/msp430_gcc/include
 
 #switch the compiler (for the internal make rules)
 CC              = msp430-elf-gcc
-AS              = msp430-elf-as
 
 all:
 	(cd ../demos/timerLib && make install)
