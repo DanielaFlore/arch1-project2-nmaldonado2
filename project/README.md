@@ -17,9 +17,10 @@ BTN3, and BTN4 correspond to the S1, S2, S3, and S4 buttons on the msp430 accord
 
 ## Instructions
 To run the game, please follow the instructions lisited below:
-1. In the current directory (project) type 'make'. The timerLib and program will
-consequently be made and the program will be
-downloaded to the msp430.
+1. In the current directory (project) type 'make'to build and install all the
+libraries and compile object files. The timerLib will consequently be made.
+2. In the current directory (project) type 'make load' to load and run the
+program on the msp430.
 2. The first state, representing the first game, is a musical arragement and
 it includes lights that change their dimness. To
 continue to the next state, press BTN1.
