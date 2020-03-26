@@ -10,10 +10,12 @@ AS              = msp430-elf-as
 
 all:
 	(cd ../demos/timerLib; make install)
-	(make load)
+	(cd game_utils; make)
+	(cd games; make)
+	(cd states_and_interrupts; make)
 
 #additional rules for files
-blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o stateMachines.o led.o catch_red.o buzzer.o buttons.o p2_interrupt_handler.o wdInterruptHandler.o simon.o find_frequency.o fur_elise.o ../demos/lib/libTimer.a states_and_interrupts/game_three_to_four_transition.s
+blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o states_and_interrupts/stateMachines.o game_utils/led.o games/catch_red.o game_utils/buzzer.o game_utils/buttons.o states_and_interrupts/p2_interrupt_handler.o states_and_interrupts/wdInterruptHandler.o games/simon.o games/find_frequency.o games/fur_elise.o ../demos/lib/libTimer.a states_and_interrupts/game_three_to_four_transition.s
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: blinky_buzzy_toy.elf
@@ -21,39 +23,11 @@ load: blinky_buzzy_toy.elf
 
 clean:
 	(cd ../demos/timerLib; make clean)
+	(cd games; make clean)
+	(cd game_utils; make clean)
+	(cd states_and_interrupts; make clean)
 	rm -f *.o *.elf
 	rm -rf ../demos/lib ../demos/h
 
 blinky_buzzy_toy.o: ../demos/timerLib/libTimer.h game_utils/led.h game_utils/buzzer.h game_utils/buttons.h
 	${CC} ${CFLAGS} -c -I../demos/timerLib -Igame_utils blinky_buzzy_toy.c
-
-
-led.o: game_utils/led.c game_utils/led.h
-	${CC} ${CFLAGS} -c -Igame_utils game_utils/led.c
-
-wdInterruptHandler.o: states_and_interrupts/wdInterruptHandler.c game_utils/led.h games/simon.h games/catch_red.h games/find_frequency.h games/fur_elise.h states_and_interrupts/stateMachines.h
-	${CC} ${CFLAGS} -c -Istates_and_interrupts -Igames -Igame_utils states_and_interrupts/wdInterruptHandler.c
-
-stateMachines.o: game_utils/led.h states_and_interrupts/stateMachines.h states_and_interrupts/stateMachines.c game_utils/buttons.h games/simon.h games/find_frequency.h games/catch_red.h states_and_interrupts/game_three_to_four_transition.s
-	${CC} ${CFLAGS} -c -Igames -Istates_and_interrupts -Igame_utils states_and_interrupts/stateMachines.c
-
-buzzer.o: game_utils/buzzer.c game_utils/buzzer.h ../demos/timerLib/libTimer.h
-	${CC} ${CFLAGS} -c -I../demos/timerLib game_utils/buzzer.c
-
-p2_interrupt_handler.o: states_and_interrupts/p2_interrupt_handler.c game_utils/buttons.h states_and_interrupts/stateMachines.h
-	${CC} ${CFLAGS} -c -Igames -Istates_and_interrupts -Igame_utils states_and_interrupts/p2_interrupt_handler.c
-
-buttons.o: game_utils/buttons.h game_utils/buttons.c
-	${CC} ${CFLAGS} -c -I./ -Igame_utils game_utils/buttons.c
-
-simon.o: games/simon.h games/simon.c game_utils/led.h game_utils/buzzer.h
-	${CC} ${CFLAGS} -c -I./ -Igame_utils -Iled games/simon.c
-
-catch_red.o: games/catch_red.h games/catch_red.c game_utils/led.h game_utils/buzzer.h
-	${CC} ${CFLAGS} -c -I./ -Igame_utils -Igames games/catch_red.c
-
-find_frequency.o: games/find_frequency.h games/find_frequency.c game_utils/buzzer.h
-	${CC} ${CFLAGS} -c -I./ -Igame_utils games/find_frequency.c
-
-fur_elise.o: games/fur_elise.h games/fur_elise.c game_utils/buzzer.h game_utils/led.h
-	${CC} ${CFLAGS} -c -I./ -Igame_utils games/fur_elise.c
