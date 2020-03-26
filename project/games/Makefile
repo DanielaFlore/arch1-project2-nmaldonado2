@@ -17,7 +17,7 @@ simon: simon.h simon.c ../game_utils/led.h ../game_utils/buzzer.h
 catch_red: catch_red.h catch_red.c ../game_utils/led.h ../game_utils/buzzer.h
 	${CC} ${CFLAGS} -c -I./ -I../game_utils catch_red.c
 
-find_frequency: find_frequency.h find_frequency.c ../game_utils/buzzer.h
+find_frequency: find_frequency.h find_frequency.c ../game_utils/buzzer.h ../game_utils/buttons.h
 	${CC} ${CFLAGS} -c -I./ -I../game_utils find_frequency.c
 
 fur_elise: fur_elise.h fur_elise.c ../game_utils/buzzer.h ../game_utils/led.h

@@ -6,8 +6,10 @@
 // When this button is pressed,the frequency will
 // change.
 
+#include <msp430.h>
 #include "find_frequency.h"
 #include "buzzer.h"
+#include "buttons.h"
 
 signed char frequency_btn = -1;
 
@@ -48,13 +50,13 @@ void find_frequency() {
     // with the bits.
     switch (frequency_btn) {
     case 1:
-      frequency_btn = 0xe;
+      frequency_btn = ~BTN1 & BUTTONS;
       break;
     case 2:
-      frequency_btn = 0xd;
+      frequency_btn = ~BTN2 & BUTTONS;
       break;
     case 3:
-      frequency_btn = 0xb;
+      frequency_btn = ~BTN3 & BUTTONS;
       break;
     }
   }
