@@ -1,6 +1,7 @@
 // Nichole Maldonado
 // This file contains the find_frequency game
-// which randomly generates a frequency and
+// which randomly generates a frequency,
+// based on the number of cycles, and
 // a matching button that maps to the frequency.
 // When this button is pressed,the frequency will
 // change.
@@ -11,14 +12,16 @@
 signed char frequency_btn = -1;
 
 /*
- * Function that generates a random frequency
- * and maps a button(1 - 3) to that frequency.
+ * Function that generates a random frequency,
+ * bazed on a randomly generated number of
+ * cycles, and maps a button(1 - 3) to that 
+ * frequency.
  * Input: None.
  * Output: None.
  */
 void find_frequency() {
   static int tick = 0;
-  static int rand_frequency = 0;
+  static int rand_num_cycles = 0;
 
   // tick can only reach 440 before being reset
   // to 0.
@@ -35,7 +38,7 @@ void find_frequency() {
   if (frequency_btn == -1) {
 
     // Range from [500, 15000]
-    rand_frequency = (tick % 15000) + 500;
+    rand_num_cycles = (tick % 15000) + 500;
 
     // Range from [3, 1]
     frequency_btn = (tick % 3) + 1;
@@ -55,5 +58,5 @@ void find_frequency() {
       break;
     }
   }
-  buzzer_set_period(rand_frequency, 1);
+  buzzer_set_period(rand_num_cycles, 1);
 }
