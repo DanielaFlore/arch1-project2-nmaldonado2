@@ -27,7 +27,8 @@ static char display_pattern();
  * Output: 1 to continue printing the pattern,
  *         or 0 if the pattern is done printing.
  */
-static char display_pattern() {
+static char display_pattern()
+{
 
   static int blink_count= 0;
   static unsigned char curr_index;
@@ -76,7 +77,8 @@ static char display_pattern() {
   return 1;
 }
 
-void simon() {
+void simon()
+{
 
   // Mute the buzzer.
   static short tick = 0;

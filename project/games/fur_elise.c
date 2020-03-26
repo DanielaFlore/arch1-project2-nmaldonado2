@@ -50,7 +50,8 @@ static void set_light(char conductor_position, char change_dimness)
  * Input: None
  * Output: None
  */
-void fur_elise_sound(){
+void fur_elise_sound()
+{
   short sound_notes[] = {1,2,1,2,1,3,4,5,6};
   static char conductor = 0;
   static int blink_count = 0;

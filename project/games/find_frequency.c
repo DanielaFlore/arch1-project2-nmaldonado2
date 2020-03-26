@@ -21,7 +21,8 @@ signed char frequency_btn = -1;
  * Input: None.
  * Output: None.
  */
-void find_frequency() {
+void find_frequency()
+{
   static int tick = 0;
   static int rand_num_cycles = 0;
 

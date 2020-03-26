@@ -24,7 +24,8 @@ char game_num = 1;
  * Input: None
  * Output: None
  */
-void game_two_interrupt_handler() {
+void game_two_interrupt_handler()
+{
   switch ((P2IN & BUTTONS)) {
   
   // If BTN4 is pressed, go to next state.

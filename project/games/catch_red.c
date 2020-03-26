@@ -38,7 +38,8 @@ static void alternate_lights()
  * Input: None.
  * Output: None.
  */
-void catch_red() {
+void catch_red()
+{
   static char blink_count = 0;
 
   // When the blink_count equals the light_speed

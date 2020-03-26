@@ -94,7 +94,8 @@ static short cycles(unsigned char note_num)
  * Input: The note number ranging from 1 - 6.
  * Output: None.
  */
-void set_sound(unsigned char i) {
+void set_sound(unsigned char i)
+{
 
   // Finds note based on cycles and sets it.
   buzzer_set_period(cycles(i), 1);

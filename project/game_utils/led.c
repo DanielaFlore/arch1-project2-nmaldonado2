@@ -51,7 +51,8 @@ void led_change()
  * Input: None.
  * Output: None.
  */
-void turn_on_green() {
+void turn_on_green()
+{
   green_on = 1;
   red_on = 0;
   led_change();
@@ -63,7 +64,8 @@ void turn_on_green() {
  * Input: None.
  * Output: None.
  */
-void turn_on_red() {
+void turn_on_red()
+{
   red_on = 1;
   green_on = 0;
   led_change();
@@ -75,7 +77,8 @@ void turn_on_red() {
  * Input: None.
  * Output: None.
  */
-void turn_off_green() {
+void turn_off_green()
+{
   green_on = 0;
   led_change();
 }
@@ -86,7 +89,8 @@ void turn_off_green() {
  * Input: None.
  * Output: None.
  */
-void turn_off_red() {
+void turn_off_red()
+{
   red_on = 0;
   led_change();
 }
@@ -97,7 +101,8 @@ void turn_off_red() {
  * Input: None.
  * Output: None.
  */
-void turn_off_green_red() {
+void turn_off_green_red()
+{
   red_on = green_on = 0;
   led_change();
 }

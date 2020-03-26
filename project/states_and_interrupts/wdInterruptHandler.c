@@ -22,16 +22,18 @@
 void __interrupt_vec(WDT_VECTOR) WDT()
 {
   // Plays game based on game_num/state.
-  if (game_num == 1) {
+  switch(game_num) {
+  case 1:
     fur_elise_sound();
-  }
-  else if (game_num == 2) {
+    break;
+  case 2:
     find_frequency();
-  }
-  else if (game_num == 3) {
+    break;
+  case 3:
     catch_red();
-  }
-  else {
+    break;
+  default:
     simon();
+    break;
   }
 }

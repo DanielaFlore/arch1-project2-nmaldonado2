@@ -1,5 +1,4 @@
 # makfile configuration
-COMMON_OBJECTS  = 
 CPU             = msp430g2553
 CFLAGS          = -mmcu=${CPU} -I ../demos/h -I games
 
