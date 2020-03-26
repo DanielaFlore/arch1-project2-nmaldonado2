@@ -14,7 +14,7 @@ all:
 	(cd states_and_interrupts && make)
 
 #additional rules for files
-blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o states_and_interrupts/stateMachines.o game_utils/led.o games/catch_red.o game_utils/buzzer.o game_utils/buttons.o states_and_interrupts/p2_interrupt_handler.o states_and_interrupts/wdInterruptHandler.o games/simon.o games/find_frequency.o games/fur_elise.o ../demos/lib/libTimer.a states_and_interrupts/game_three_to_four_transition.s
+blinky_buzzy_toy.elf: ${COMMON_OBJECTS} blinky_buzzy_toy.o states_and_interrupts/state_machines.o game_utils/led.o games/catch_red.o game_utils/buzzer.o game_utils/buttons.o states_and_interrupts/p2_interrupt_handler.o states_and_interrupts/wdt_interrupt_handler.o games/simon.o games/find_frequency.o games/fur_elise.o ../demos/lib/libTimer.a states_and_interrupts/game_three_to_four_transition.s
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: blinky_buzzy_toy.elf

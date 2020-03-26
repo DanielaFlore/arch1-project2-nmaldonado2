@@ -1,7 +1,8 @@
 // Nichole Maldonado
-// This is the header file for stateMachines.c
+// This is the header file for state_machines.c
 // which determines which function to call to
-// handle the interrupt based on the game number.
+// handle the interrupt based on the game number
+// and therefore based on the current state.
 
 #ifndef stateMachine_included
 #define stateMachine_included

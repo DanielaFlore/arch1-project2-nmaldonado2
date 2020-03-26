@@ -5,7 +5,7 @@
 // functionality otherwise.
 
 #include <msp430.h>
-#include "stateMachines.h"
+#include "state_machines.h"
 #include "led.h"
 #include "buttons.h"
 #include "simon.h"
