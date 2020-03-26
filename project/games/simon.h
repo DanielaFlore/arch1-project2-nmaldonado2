@@ -13,3 +13,5 @@ extern unsigned char game_pattern[32];
 // Function that initiates the printing of
 // game patterns and adding to the pattern.
 void simon();
+
+

@@ -6,4 +6,10 @@
 
 // Plays the first nine notes of
 // fur elise
+
+#ifndef fur_elise
+#define fur_elise
+
 void fur_elise_sound();
+
+#endif //included

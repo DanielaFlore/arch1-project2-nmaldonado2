@@ -8,3 +8,4 @@ extern signed char frequency_btn;
 // Generates random frequency and maps it
 // to a random button number (1 - 3).
 void find_frequency();
+

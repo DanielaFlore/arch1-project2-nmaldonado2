@@ -61,31 +61,31 @@ static short cycles(unsigned char note_num)
 
   // Note E
   if (note_num == 1) {
-    return 2637;
+    return NOTE_E;
   }
 
   // Note E flat
   if (note_num == 2) {
-    return 2489;
+    return NOTE_E_FLAT;
   }
 
   // Note B
   if (note_num == 3) {
-    return 1975;
+    return NOTE_B;
   }
 
   // Note D
   if (note_num == 4) {
-    return 2349;
+    return NOTE_D;
   }
 
   // Note C
   if (note_num == 5) {
-    return 2093;
+    return NOTE_C;
   }
 
   // Note A
-  return 1760;
+  return NOTE_A;
 }
 
 /*

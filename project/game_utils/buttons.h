@@ -1,4 +1,4 @@
-// Nichole Maldonado and Previous Commits
+// Nichole Maldonado
 // Header file for buttons.c which prepares the
 // buttons for use and changes the IES based
 // on the current transition.
