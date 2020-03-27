@@ -40,6 +40,8 @@ void game_two_interrupt_handler()
 
   default:
 
+    // NOTE: If, else used since frequency_btn
+    // is not a constant value and cannot be a case.
     // If the frequency_btn matches the button
     // pressed turn on green and set frequency_btn
     // to -1.
@@ -87,8 +89,8 @@ void game_four_interrupt_handler()
       buzzer_set_period(900, 2);
     }
 
-    // If BTN3 is pressed, turn on green.
-    else if ((P2IN & 0xf) == 0xe) {
+    // If BTN1 is pressed, turn on green.
+    else if ((P2IN & BUTTONS) == (~BTN1 & BUTTONS)) {
       turn_on_green();
       buzzer_set_period(1200, 1);
     }
