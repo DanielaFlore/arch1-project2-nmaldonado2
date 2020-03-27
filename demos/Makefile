@@ -3,8 +3,6 @@ all:
 	(cd blink_demo; make)
 	(cd button_demo; make)
 	(cd buzzer_demo; make)
-	(cd dim_demo; make)
-
 clean:
 	(cd timerLib; make clean)
 	(cd blink_demo; make clean)
