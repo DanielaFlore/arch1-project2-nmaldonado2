@@ -112,4 +112,6 @@ To exit, press BTN3.
 It is also important to note that the msp430 is very sensitive, so accidental
 double button clicks will cause the game to re-start, without you, maybe
 realizing it. I found the best way to avoid this is to lay the msp430 flat on
-the table and press down,
+the table and press down. I have also found that holding the button rather
+than quickly pressing it helps. Above all, just make sure that you aren't
+accidentally pressing the button twice, since mine has proven to be extremely sensitive.

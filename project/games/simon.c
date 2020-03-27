@@ -31,7 +31,7 @@ static char display_pattern()
 {
 
   static int blink_count= 0;
-  static unsigned char curr_index;
+  static unsigned char curr_index = 0;
 
   if (blink_count == 0) {
     buzzer_set_period(0, 0);
