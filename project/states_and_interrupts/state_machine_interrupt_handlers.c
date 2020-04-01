@@ -5,12 +5,9 @@
 // functionality otherwise.
 
 #include <msp430.h>
-#include "state_machine_interrupt_handlers.h"
 #include "led.h"
 #include "buttons.h"
 #include "simon.h"
-#include "find_frequency.h"
-#include "catch_red.h"
 #include "buzzer.h"
 
 char game_num = 1;

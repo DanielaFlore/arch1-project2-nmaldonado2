@@ -7,6 +7,13 @@
 #include "libTimer.h"
 #include "buzzer.h"
 
+#define NOTE_E 3033
+#define NOTE_E_FLAT 3214
+#define NOTE_B 4049
+#define NOTE_D 3405
+#define NOTE_C 3822
+#define NOTE_A 4545
+
 static short cycles(unsigned char note_num);
 
 /*

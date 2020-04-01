@@ -6,13 +6,6 @@
 #ifndef buzzer_included
 #define buzzer_included
 
-#define NOTE_E 2637
-#define NOTE_E_FLAT 2489
-#define NOTE_B 1975
-#define NOTE_D 2349
-#define NOTE_C 2093
-#define NOTE_A 1760
-
 // Initialize the buzzer.
 void buzzer_init();
 
