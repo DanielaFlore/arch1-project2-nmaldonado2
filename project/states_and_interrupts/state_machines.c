@@ -24,6 +24,8 @@ char game_num = 1;
  * Input: None
  * Output: None
  */
+
+/*
 void game_two_interrupt_handler()
 {
   switch ((P2IN & BUTTONS)) {
@@ -45,6 +47,7 @@ void game_two_interrupt_handler()
     // If the frequency_btn matches the button
     // pressed turn on green and set frequency_btn
     // to -1.
+    
     if ((P2IN & BUTTONS) == frequency_btn) {
       turn_on_green();
       frequency_btn = -1;
@@ -57,7 +60,7 @@ void game_two_interrupt_handler()
     break;
   }
 }
-
+*/
 /*
  * Interrupt handler for Simon that moves to 
  * the next state if BTN3 is pressed or

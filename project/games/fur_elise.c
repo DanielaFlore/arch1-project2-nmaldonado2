@@ -52,9 +52,9 @@ static void set_light(char conductor_position, char change_dimness)
  */
 void fur_elise_sound()
 {
-  short sound_notes[] = {1,2,1,2,1,3,4,5,6};
+  char sound_notes[] = {1,2,1,2,1,3,4,5,6};
   static char conductor = 0;
-  static int blink_count = 0;
+  static char blink_count = 0;
 
   // If the blink_count is less than 200,
   // then turn the lights on and off accordingly.
