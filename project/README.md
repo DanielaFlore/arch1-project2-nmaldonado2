@@ -7,8 +7,8 @@ directory. The project is further subdivided into three directories:
 states.
 2. game_utils - source and header files for the buzzer, buttons, and led.
 3. states_and_interrupts - source and header files for the state transitions
-and interrupt handlers. Also includes the .s file for the state transition
-from game three to four.
+and interrupt handlers. Also includes the .s file for the state transitions
+and interrupt handling for games/states two and three.
 
 ## Button Mapping
 

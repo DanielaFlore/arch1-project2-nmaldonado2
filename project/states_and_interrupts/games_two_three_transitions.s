@@ -1,3 +1,9 @@
+;;; Nichole Maldonado
+;;; Assembly file that handles the state
+;;; transitions for game two (find_frequency)
+;;; and game three (catch_red).
+
+
 ;;; State Three Machine
 ;;; Interrupt handler and state machine for
 ;;; game 3, catch red that will increment the
