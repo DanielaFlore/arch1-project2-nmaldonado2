@@ -5,7 +5,7 @@
 
 #include <msp430.h>
 #include "buttons.h"
-#include "state_machines.h"
+#include "state_machine_interrupt_handlers.h"
 
 /*
  * Function that calls the corresponding

@@ -5,7 +5,7 @@
 // game_num.
 
 #include <msp430.h>
-#include "state_machines.h"
+#include "state_machine_interrupt_handlers.h"
 #include "simon.h"
 #include "catch_red.h"
 #include "find_frequency.h"
