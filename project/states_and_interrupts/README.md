@@ -9,7 +9,7 @@ corresponding interrupt handler for that game/state in state_machine_interrupt_h
 the game_num.
 * wdt_interrupt_handler.c - handles the watchdog timer interrupts and
 specifies which game to play based on the game_num.
-* games_two_three_transitions.s - assembly code for the interrupt handling and
+* games_two_three_interrupt_handlers.s - assembly code for the interrupt handling and
 state transitions for games two and three.
 
 Additionally, the Makefile located in this directory has the capability to

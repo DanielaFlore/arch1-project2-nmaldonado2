@@ -6,7 +6,7 @@
 #include <msp430.h>
 #include "buttons.h"
 #include "state_machine_interrupt_handlers.h"
-#include "games_two_three_transitions.h"
+#include "games_two_three_interrupt_handlers.h"
 
 /*
  * Function that calls the corresponding

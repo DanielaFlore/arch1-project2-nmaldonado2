@@ -13,52 +13,6 @@
 char game_num = 1;
 
 /*
- * Interrupt handler for find Frequency that
- * will go to the next state if the fourth
- * button is pressed. Otherwise, a green led light
- * will shine if the frequency_btn and actual
- * button pressed match.
- * Input: None
- * Output: None
- */
-
-/*
-void game_two_interrupt_handler()
-{
-  switch ((P2IN & BUTTONS)) {
-  
-  // If BTN4 is pressed, go to next state.
-  case (~BTN4 & BUTTONS):
-    game_num = 3;
-    break;
-
-  // If no buttons are pressed, turn off all lights.
-  case BUTTONS:
-    turn_off_green_red();
-    break;
-
-  default:
-
-    // NOTE: If, else used since frequency_btn
-    // is not a constant value and cannot be a case.
-    // If the frequency_btn matches the button
-    // pressed turn on green and set frequency_btn
-    // to -1.
-    
-    if ((P2IN & BUTTONS) == frequency_btn) {
-      turn_on_green();
-      frequency_btn = -1;
-    }
-
-    // Otherwise, turn on red.
-    else {
-      turn_on_red();
-    }
-    break;
-  }
-}
-*/
-/*
  * Interrupt handler for Simon that moves to 
  * the next state if BTN3 is pressed or
  * identifies if the user is currently entering

@@ -3,7 +3,6 @@
 ;;; transitions for game two (find_frequency)
 ;;; and game three (catch_red).
 
-
 ;;; State Three Machine
 ;;; Interrupt handler and state machine for
 ;;; game 3, catch red that will increment the
@@ -41,7 +40,6 @@ second_nested_if:
 end:	
 	ret
 
-
 ;;; State machine for game three.
 ;;; Interrupt handler for find_frequency that
 ;;; will go to the next state if the fourth
@@ -50,7 +48,6 @@ end:
 ;;; pressed match
 ;;; Input: None
 ;;; Output: None
-	.text
 jt:
 	.word option1			;7
 	.word default			;8
