@@ -100,3 +100,78 @@ void game_one_interrupt_handler()
     game_num = 2;
   }
 }
+
+// DEPRECATED. The following code can be
+// found in the assembly file
+// games_two_three_interrupt_handlers.s
+
+// Handler for game 2 which determines if
+// user selected the correct button that
+// maps to the random frequency.
+/*
+void game_two_interrupt_handler()
+{
+  switch (P2IN & BUTTONS) {
+  case (~BTN4 & BUTTONS):
+    game_num = 3;
+    break;
+  
+
+  // If no buttons are pressed, turn off all leds.
+  case BUTTONS:
+    turn_off_green_red();
+    break;
+  default:
+
+    // NOTE: If, else used since frequency_btn
+    // is not a constant value and cannot be a case.
+    // If the frequency_btn matches the button
+    // pressed turn on green and set frequency_btn
+    // to -1.
+
+    if ((P2IN & BUTTONS) == frequency_btn) {
+      turn_on_green();
+      frequency_btn = -1;
+    }
+
+    // Otherwise, turn on red.
+    else {
+      turn_on_red.
+    }
+  }    
+}
+*/
+
+ // DEPRECATED: The following code is implemented
+ // in the assembly file
+ // games_two_three_interrupt_handlers.s
+
+ // Handler for catch red which
+ // makes the lights toggle faster
+ // if the red light and BTN4 are pressed
+ // simultaneously.
+ /*
+void game_three_interrupt_handler()
+{
+
+  // If BTN2 pressed, go to next state.
+  if ((P2IN & BUTTONS) == (~BTN2 & BUTTONS)) {
+    game_num = 4;
+  }
+  
+  if ((P2IN & BUTTONS) == (~BTN4 & BUTTONS)) {
+
+    // If red is on, go faster.
+    if (red_on) {
+      light_speed -= 5;
+    }
+
+    // Reset light_speed if light_speed is too
+    // fast or red is not on.
+    if (!red_on || light_speed <= 15) {
+      light_speed = 150;
+    }
+  }
+}
+
+*/
