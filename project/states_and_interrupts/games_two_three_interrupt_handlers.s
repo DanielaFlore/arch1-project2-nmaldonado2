@@ -49,7 +49,7 @@ end:
 ;;; Input: None
 ;;; Output: None
 jt:
-	.word option1			;7
+	.word case_seven			;7
 	.word default			;8
 	.word default			;9
 	.word default			;10
@@ -57,7 +57,7 @@ jt:
 	.word default			;12
 	.word default			;13
 	.word default			;14
-	.word option2			;15
+	.word case_fifteen			;15
 
 	.global game_two_interrupt_handler
 game_two_interrupt_handler:
@@ -66,11 +66,11 @@ game_two_interrupt_handler:
 	sub.b #7, r12		;(P2IN & BUTTONS) - 7
 	jnc default		;borrows if P2IN & BUTTONS is less than 7.
 	add r12, r12
-	mov jt(r12), r0		; Go to option1, option2, or default
-option1:
+	mov jt(r12), r0		; Go to case_seven, case_fifteen, or default
+case_seven:
 	mov.b #3, &game_num	; If BTN4 is pressed, go to next state.
 	jmp end_game_two
-option2:
+case_fifteen:
 	call #turn_off_green_red ;If no buttons are pressed, turn off leds.
 	jmp end_game_two
 default:	
