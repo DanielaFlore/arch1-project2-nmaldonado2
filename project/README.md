@@ -15,9 +15,6 @@ and interrupt handling for games/states two and three.
 In the instructions listed below, it is important to note that BTN1, BTN2,
 BTN3, and BTN4 correspond to the S1, S2, S3, and S4 buttons on the msp430 accordingly.
 
-## State Transition Diagram
-![std_image](std_diagram/blinky_buzzy_toy_std.jpg)
-
 ## Instructions
 To run the game, please follow the instructions lisited below:
 1. In the current directory (project) type 'make'to build and install all the
@@ -49,6 +46,9 @@ wrong pattern, the game will start from the beginning again. To go back to
 state 1, press BTN3.
 
 NOTE: type 'make clean' to remove all *.o, *.elf files, lib, and h.
+
+## State Transition Diagram
+![std_image](std_diagram/blinky_buzzy_toy_std.jpg)
 
 ## Project Description
 
