@@ -15,9 +15,6 @@ and interrupt handling for games/states two and three.
 In the instructions listed below, it is important to note that BTN1, BTN2,
 BTN3, and BTN4 correspond to the S1, S2, S3, and S4 buttons on the msp430 accordingly.
 
-## State Transition Diagram
-![Toy_STD](/std_diagram/blinky_buzzy_toy_std.jpg)
-
 ## Instructions
 To run the game, please follow the instructions lisited below:
 1. In the current directory (project) type 'make'to build and install all the
