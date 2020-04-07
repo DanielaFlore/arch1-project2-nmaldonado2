@@ -16,7 +16,7 @@ In the instructions listed below, it is important to note that BTN1, BTN2,
 BTN3, and BTN4 correspond to the S1, S2, S3, and S4 buttons on the msp430 accordingly.
 
 ## State Transition Diagram
-![std_image](/std_diagram/blinky_buzzy_toy_std.jpg)
+![std_image](std_diagram/blinky_buzzy_toy_std.jpg)
 
 ## Instructions
 To run the game, please follow the instructions lisited below:
