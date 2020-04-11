@@ -4,6 +4,7 @@ CFLAGS          = -mmcu=${CPU} -I ../demos/h -I games
 
 #switch the compiler (for the internal make rules)
 CC              = msp430-elf-gcc
+AS              = msp430-elf-as -mcpu=msp430 --tranditional-format -mP
 
 all: wdt_interrupt_handler state_machine_interrupt_handlers p2_interrupt_handler games_two_three_interrupt_handlers
 
