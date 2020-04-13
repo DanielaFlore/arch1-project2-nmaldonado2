@@ -35,7 +35,7 @@ second_nested_if:
 	jnz end
 	mov #15, r13
 	cmp.b &light_speed, r13	; or the light speed is <= 15
-	jc end
+	jhs end			;goto end
 	mov.b #150, &light_speed ; set light_speed to 150
 end:	
 	ret
@@ -64,7 +64,7 @@ game_two_interrupt_handler:
 	mov #0xf, r12
 	and.b &P2IN, r12 	;P2IN & BUTTONS in r12
 	sub.b #7, r12		;(P2IN & BUTTONS) - 7
-	jnc default		;borrows if P2IN & BUTTONS is less than 7.
+	jlo default		;borrows if P2IN & BUTTONS is less than 7, so carry == 0.
 	add r12, r12
 	mov jt(r12), r0		; Go to case_seven, case_fifteen, or default
 case_seven:
